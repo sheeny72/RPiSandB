@@ -100,7 +100,7 @@ Filtered shift between velocity and pressure in 1/100ths of a second,
 Filtered trace correlation coefficient.
 
 # LocalStns2.py
-This code can be run on any Raspberry Shake or Raspberry Shake and Boom on the Rasberry Shake Network.
+This code can be run on any Raspberry Shake or Raspberry Shake and Boom on the Raspberry Shake Network.
 It reads the EHZ (vertical geophone) channel of each station.
 
 Output Includes:
