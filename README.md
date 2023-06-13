@@ -98,3 +98,18 @@ EHZ velocity trace,
 HDF pressure trace,
 Filtered shift between velocity and pressure in 1/100ths of a second,
 Filtered trace correlation coefficient.
+
+# LocalStns2.py
+This code can be run on any Raspberry Shake or Raspberry Shake and Boom on the Rasberry Shake Network.
+It reads the EHZ (vertical geophone) channel of each station.
+
+Output Includes:
+A Section Plot of Station Traces,
+A customised map of the area of the stations and the event/earthquake,
+
+This program can be used to plot a section across multiple local stations for a known earthquake,
+or it can also be used to locate an unregistered event such as a small local earthquake, or mine blast
+by trial and error on the event location and timing.
+
+Example output file:
+Ulan Mine Blast 230610 060918UTC 1.png
