@@ -73,3 +73,7 @@ Conversion of Infrasound Pressure to Infrasound Intensity,
 Integration of the Infrasound Pressure trace to create the Cumulative Infrasound Energy trace,
 Calculation of Peak Source Infrasound Power,
 Calculation of Total Infrasound Power.
+
+Example output files:
+R21C0 Background InfrasoundR21C0 HDF 20230605 021500 UTC.png
+Spacex Dragon Crew 1 Trunk Re-EntryR21C0 HDF 20220708 212230 UTC 3.png
