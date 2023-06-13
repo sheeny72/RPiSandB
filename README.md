@@ -77,3 +77,24 @@ Calculation of Total Infrasound Power.
 Example output files:
 R21C0 Background InfrasoundR21C0 HDF 20230605 021500 UTC.png
 Spacex Dragon Crew 1 Trunk Re-EntryR21C0 HDF 20220708 212230 UTC 3.png
+
+# RSandBCorr.py
+This code can be run on any Raspberry Shake and Boom on the Raspberry Shake Network.
+It could be adapted to compare any two channels on any two stations on the Raspberry Shake Network.
+It reads both the EHZ and HDF channels of the Raspberry Shake and Boom and tests for correlation between the two channels.
+i.e. is a seismic signal driving the infrasound channel or producing infrasound or is an infrasound signal driving the vibration channel or producing a seismic signal.
+
+Both the raw counts traces and the filtered (velocity and pressure) traces are tested for correlations.
+
+This was developed as a first step to developing a program to search for meteor infrasound detections.
+i.e. if there is a reasonable correlation with the seismic signal it is not likely to be a meteor.
+
+Output includes:
+EHZ raw counts trace,
+HDF raw counts trace,
+Raw shift between traces in 1/100ths of a second,
+Raw trace correlation coefficient,
+EHZ velocity trace,
+HDF pressure trace,
+Filtered shift between velocity and pressure in 1/100ths of a second,
+Filtered trace correlation coefficient.
