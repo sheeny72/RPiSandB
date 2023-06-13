@@ -41,3 +41,35 @@ Plotting arrivals,
 Figure and Axes Text.
 
 Files "M5.8 West of Macquarie Island*.png" are examples of the output.
+
+# BoomEventReport4.py
+This code can be run on any Raspberry Boom or Raspberry Shake and Boom on the Raspberry Shake Network.
+It reads the HDF channel (infrasound sensor) which is common to all Raspberry Booms and Raspberry Shake and Booms.
+
+Output includes:
+Raw count trace,
+Peak Raw Counts,
+Power Spectral Density of both Raw Counts and Filtered Infrasound Prssure (Pa),
+Spectrogram of the Unfilterd Raw Counts,
+Filtered Infrasound Pressure trace in Pascals (Pa),
+Peak Filtered Infrasound Pressure (Pa),
+Unweighted Infrasound Pressure Level trace in decibels (dB),
+Peak Unweighted Infrasound Level (dB),
+Filtered Infrasound Intensity trace (W/m2),
+Peak Filtered Infrasound Intensity (W/m2),
+Peak Source Filtered Infrasound Power (W) if the distance to the source is known,
+Filtered Infrasound Energy Cumulative trace (J/m2),
+Total Cumulative Filtered Infrasound Energy (J) if the dtsance to the source is known,
+Notes.
+
+Most plot information is added in lines 40 to 61.
+
+The program demonstrates:
+Reading station traces,
+Removing instrument response,
+Conversion of counts to Infrasound Pressure,
+Conversion of Infrasound Pressure to Infrasound Pressure Level,
+Conversion of Infrasound Pressure to Infrasound Intensity,
+Integration of the Infrasound Pressure trace to create the Cumulative Infrasound Energy trace,
+Calculation of Peak Source Infrasound Power,
+Calculation of Total Infrasound Power.
