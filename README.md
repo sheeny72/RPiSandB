@@ -39,3 +39,5 @@ Differentiation of a Trace,
 Secondary axes,
 Plotting arrivals,
 Figure and Axes Text.
+
+Files "M5.8 West of Macquarie Island*.png" are examples of the output.
