@@ -96,7 +96,7 @@ lonS = sta.longitude     # station longitude
 eleS = sta.elevation     # station elevation
       
 # Setup the data plot
-delay = 580                  # delay the start of the plot from the event **** Enter data****
+delay = 500                  # delay the start of the plot from the event **** Enter data****
 duration = 900                  # duration of plots **** Enter data****
 
 notes1 = ""                       # add notes to the diagram. max one \n per note.
@@ -259,8 +259,8 @@ fig.text(0.98, 0.815, '#Cartopy', ha='right')
 
 # plot logos
 pics = "D:/Pictures/Raspberry Shake and Boom/"
-rsl = plt.imread(pics+"RS logo.png")
-twl = plt.imread(pics+"twitter logo.png")
+rsl = plt.imread("RS logo.png")
+twl = plt.imread("twitter logo.png")
 newaxr = fig.add_axes([0.935, 0.915, 0.05, 0.05], anchor='NE', zorder=-1)
 newaxr.imshow(rsl)
 newaxr.axis('off')
