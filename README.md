@@ -113,3 +113,40 @@ by trial and error on the event location and timing.
 
 Example output file:
 Ulan Mine Blast 230610 060918UTC 1.png
+
+# Q3DSEReport.py
+This code can be run on any RS3D Raspberry Shake on the Raspberry Shake Network.
+It reads all three channels (EHZ, EHE and EHN).
+
+Output includes:
+Filtered velocity traces for EHZ, EHE and EHN channels,
+Specific Energy Traces showing total Specific Energy and components from each of the 3 channels,
+Unfiltered spectrogram of the EHZ channel,
+Power Spectral Density plots for all three channels,
+Background Noise levels on all three channels,
+a table of Phase arrival times,
+Spherical Ray Path plot,
+Nearside Perspective map of the event and station,
+Event details,
+Quake Energy,
+Phase key,
+Notes.
+
+The background noise limits and Specific Energy plot were developed to assist identification of weak arrivals.
+
+Copy and save the files "RS logo.png" and "twitter logo.png" to the same location as Q3DSEReport.
+
+Most plot information is entered in lines 75 to 113.
+Bandpass Filter corners are specified in lines 124 to 135.
+
+The program demonstrates:
+Reading station traces,
+Removing instrument response,
+Trace manipulation/calculations,
+Secondary axes,
+Plotting arrivals,
+Figure and Axes Text.
+
+Example output files:
+M6.8Quake Prince Edward Islands Regionrs2023jydjza20230521 145645 UTCR255B All.png
+M6.8Quake Prince Edward Islands Regionrs2023jydjza20230521 145645 UTCR255B P pP sP PcP.png
