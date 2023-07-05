@@ -122,7 +122,9 @@ Output includes:
 Filtered velocity traces for EHZ, EHE and EHN channels,
 Specific Energy Traces showing total Specific Energy and components from each of the 3 channels,
 Unfiltered spectrogram of the EHZ channel,
-Power Spectral Density plots for all three channels,
+a choice of:
+Power Spectral Density plots for all three channels; or
+Fast Fourier Transform plot of all three channels,
 Background Noise levels on all three channels,
 a table of Phase arrival times,
 Spherical Ray Path plot,
@@ -136,8 +138,8 @@ The background noise limits and Specific Energy plot were developed to assist id
 
 Copy and save the files "RS logo.png" and "twitter logo.png" to the same location as Q3DSEReport.
 
-Most plot information is entered in lines 75 to 113.
-Bandpass Filter corners are specified in lines 124 to 135.
+Most plot information is entered in lines 80 to 115.
+Bandpass Filter corners are specified in lines 126 to 137.
 
 The program demonstrates:
 Reading station traces,
@@ -148,5 +150,5 @@ Plotting arrivals,
 Figure and Axes Text.
 
 Example output files:
-M6.8Quake Prince Edward Islands Regionrs2023jydjza20230521 145645 UTCR255B All.png
-M6.8Quake Prince Edward Islands Regionrs2023jydjza20230521 145645 UTCR255B P pP sP PcP.png
+M6.9Quake Tonga Islandsrs2023mwwzcd20230702 102743 UTCRB59E All.png
+M6.9Quake Tonga Islandsrs2023mwwzcd20230702 102743 UTCRB59E P P P pP pP pP pP sP sP sP sP sP.png
