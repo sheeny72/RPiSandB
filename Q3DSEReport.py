@@ -11,6 +11,11 @@ import cartopy.crs as ccrs
 import cartopy.feature as cfeature
 rs = Client('https://data.raspberryshake.org/')
 
+# Pretty paired colors. Reorder to have saturated colors first and remove
+# some colors at the end. This cmap is compatible with obspy taup
+cmap = plt.get_cmap('Paired', lut=12)
+COLORS = ['#%02x%02x%02x' % tuple(int(col * 255) for col in cmap(i)[:3]) for i in range(12)]
+COLORS = COLORS[1:][::2][:-1] + COLORS[::2][:-1]
 def plot_arrivals(ax, d1):
     y1 = -1
     axb, axt = ax.get_ylim()               # calculate the y limits of the graph
@@ -18,12 +23,12 @@ def plot_arrivals(ax, d1):
         x1 = arrs[q].time                  # extract the time to plot
         if (x1 >= delay):
             if x1 < delay+duration:
-                ax.axvline(x=x1-d1, linewidth=0.5, linestyle='--', color='black')      # draw a vertical line
+                ax.axvline(x=x1-d1, linewidth=0.7, linestyle='--', color=COLORS[q % len(COLORS)])      # draw a vertical line
                 if y1 < 0 or y1 < axt/2:                      # alternate top and bottom for phase tags
                     y1 = axt*0.8
                 else:
                     y1 = axb*0.95
-                ax.text(x1-d1,y1,arrs[q].name, alpha=0.5)     # print the phase name
+                ax.text(x1-d1,y1,arrs[q].name, alpha=0.7, color=COLORS[q % len(COLORS)])     # print the phase name
     x1 = rayt       #plot the Rayleight Surface Wave arrival
     if (x1>=delay):
         if x1 < delay+duration:
@@ -73,16 +78,16 @@ def divTrace(tr, n):            # divide trace into n equal parts for background
     return tr.__div__(n)
 
 #enter event data
-eventTime = UTCDateTime(2023, 5, 21, 14, 56, 45) # (YYYY, m, d, H, M, S) **** Enter data****
-latE = -43.4                           # quake latitude + N -S **** Enter data****
-lonE = 39.4                        # quake longitude + E - W **** Enter data****
-depth = 10                             # quake depth, km **** Enter data****
-mag = 6.8                              # quake magnitude **** Enter data****
-eventID = 'rs2023jydjza'               # ID for the event **** Enter data****
-locE = "Prince Edward Islands Region"                # location name **** Enter data****
+eventTime = UTCDateTime(2023, 7, 2, 10, 27, 43) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -17.9                           # quake latitude + N -S **** Enter data****
+lonE = -174.9                        # quake longitude + E - W **** Enter data****
+depth = 229                             # quake depth, km **** Enter data****
+mag = 6.9                              # quake magnitude **** Enter data****
+eventID = 'rs2023mwwzcd'               # ID for the event **** Enter data****
+locE = "Tonga Islands"                # location name **** Enter data****
 
 # set the station name and download the response information
-stn = 'R255B'      # your station name
+stn = 'RB59E'      # your station name
 inv = rs.get_stations(network='AM', station=stn, level='RESP')  # get the instrument response
 k=0
 while True:     #loop until the active epoch is found
@@ -96,16 +101,13 @@ lonS = sta.longitude     # station longitude
 eleS = sta.elevation     # station elevation
       
 # Setup the data plot
-delay = 500                  # delay the start of the plot from the event **** Enter data****
+delay = 200                  # delay the start of the plot from the event **** Enter data****
 duration = 900                  # duration of plots **** Enter data****
 
 notes1 = ""                       # add notes to the diagram. max one \n per note.
 notes2 = ""
 notes3 = ""
-
-# set up the map
-sat_height = 100000000.0   # adjust satellite height for desire view on map
-lat_correction = 0              # correction in latutude for large distances
+psd = True         # True to plot PSD, False to plot FFT **** Enter data****
 
 # set up the traces and ray paths
 plot_envelopes = False          # plot envelopes on traces
@@ -125,7 +127,7 @@ bnend = eventTime + bnE
 #filt = [0.1, 0.1, 0.8, 0.9]
 #filt = [0.3, 0.3, 0.8, 0.9]
 #filt = [0.5, 0.5, 2, 2.1]
-filt = [0.7, 0.7, 2, 2.1]       # distant quake
+filt = [0.69, 0.7, 2, 2.1]       # distant quake
 #filt = [0.7, 0.7, 3, 3.1]
 #filt = [0.7, 0.7, 4, 4.1]
 #filt = [0.7, 0.7, 6, 6.1]
@@ -221,14 +223,26 @@ n_env = filter.envelope(outst[1].data)     # create acceleration envelope
 se_env=(z_env*z_env+e_env*e_env+n_env*n_env)/2    # create specific energy envelope from velocity envelope! - comment out undesired method.
 
 # set up map plot
+if great_angle_deg <5:      #set satellite height based on separation
+    sat_height = 1000000
+elif great_angle_deg <25:
+    sat_height = 10000000
+elif great_angle_deg >120:
+    sat_height = 100000000000
+elif great_angle_deg >90:
+    sat_height = 1000000000
+else:
+    sat_height = 100000000
+    
 latC = (latE+latS)/2        # latitude 1/2 way between station and event/earthquake - may need adjusting!
 lonC = (lonE+lonS)/2        # longitude 1/2 way between station and event/earthquake - may need adjusting!
 if abs(lonE-lonS) > 180:
     lonC = lonC + 180
 projection=ccrs.NearsidePerspective(
-      central_latitude=latC + lat_correction,
+      central_latitude=latC,
       central_longitude=lonC,
       satellite_height=sat_height)      # adjust satellite height to best display station and event/earthquake
+projection._threshold = projection._threshold/20    #reduce threshold so great circle lines are smooth
 
 # set up plot
 fig = plt.figure(figsize=(20,14), dpi=150)       # set to page size in inches
@@ -328,14 +342,17 @@ ax1.plot(st[0].times(reftime=eventTime), outst[2].data, lw=1, color='b')      # 
 ax1.xaxis.set_minor_locator(AutoMinorLocator(10))
 ax1.yaxis.set_minor_locator(AutoMinorLocator(5))
 # ax1.set_ylim(-2e-8,2e-8)         # set manual y limits for displacement- comment this out for autoscaling
+ax1.margins(x=0)
 ax2.plot(st[0].times(reftime=eventTime), outst[0].data, lw=1, color='g')       # velocity Waveform
 ax2.xaxis.set_minor_locator(AutoMinorLocator(10))
 ax2.yaxis.set_minor_locator(AutoMinorLocator(5))
 # ax2.set_ylim(-1e-7,1e-7)         # set manual y limits for velocity - comment this out for autoscaling
+ax2.margins(x=0)
 ax3.plot(st[0].times(reftime=eventTime), outst[1].data, lw=1, color='r')       # acceleration waveform
 ax3.xaxis.set_minor_locator(AutoMinorLocator(10))
 ax3.yaxis.set_minor_locator(AutoMinorLocator(5))
 # ax3.set_ylim(-5e-7,5e-7)         # set manual y limits for acceleration - comment this out for auto scaling
+ax3.margins(x=0)
 ax4.specgram(x=rawtrace, NFFT=128, noverlap=64, Fs=100, cmap='viridis')         # velocity spectrogram
 ax4.xaxis.set_minor_locator(AutoMinorLocator(10))
 ax4.set_yscale('log')               # set logarithmic y scale - comment this out for linear scale
@@ -343,19 +360,52 @@ ax4.set_ylim(0.5,50)              # limits for log scale
 # plot filter limits on spectrogram
 ax4.axhline(y=filt[1], lw=1, color='r', linestyle='dotted')
 ax4.axhline(y=filt[2], lw=1, color='r', linestyle='dotted')
-# ax5.psd(x=rawtrace[0], NFFT=512, noverlap=0, Fs=100, color='k', lw=1)      # velocity PSD raw data
-ax5.psd(x=st[2], NFFT=nfft, noverlap=0, Fs=100, color='b', label='EHZ', lw=1)             # displacement PSD filtered
-ax5.psd(x=st[1], NFFT=nfft, noverlap=0, Fs=100, color='r', label='EHN', linestyle='--', lw=1)             # velocity PSD filtered
-ax5.psd(x=st[0], NFFT=nfft, noverlap=0, Fs=100, color='g', label='EHE', linestyle='-.', lw=1)             # acceleration PSD filtered
-ax5.legend(fontsize='x-small')
-ax5.set_xscale('log')               #use logarithmic scale on PSD
-# plot filter limits on PSD
-ax5.axvline(x=filt[1], linewidth=1, linestyle='dotted', color='r')
-ax5.axvline(x=filt[2], linewidth=1, linestyle='dotted', color='r')
 ax6.plot(st[0].times(reftime=eventTime), (outst[0].data*outst[0].data+outst[1].data*outst[1].data+outst[2].data*outst[2].data)/2, lw=1, color='purple', linestyle=':')  #specific kinetic energy Waveform
 ax6.xaxis.set_minor_locator(AutoMinorLocator(10))
 ax6.yaxis.set_minor_locator(AutoMinorLocator(5))
 # ax6.set_ylim(0,5e-15)         # set manual y limits for energy - comment this out for autoscaling
+ax6.margins(x=0)
+
+#plot either PSD or FFT plot
+if psd:
+    #calculate NFFT for PSD
+    if duration >= 82:
+        nfft = 8192
+    else:
+        nfft = duration*100
+    # ax5.psd(x=rawtrace[0], NFFT=512, noverlap=0, Fs=100, color='k', lw=1)      # velocity PSD raw data
+    ax5.psd(x=st[2], NFFT=nfft, noverlap=0, Fs=100, color='b', label='EHZ', lw=1)             # displacement PSD filtered
+    ax5.psd(x=st[1], NFFT=nfft, noverlap=0, Fs=100, color='r', label='EHN', linestyle='--', lw=1)             # velocity PSD filtered
+    ax5.psd(x=st[0], NFFT=nfft, noverlap=0, Fs=100, color='g', label='EHE', linestyle='-.', lw=1)             # acceleration PSD filtered
+    ax5.legend(fontsize='x-small')
+    ax5.set_xscale('log')               #use logarithmic scale on PSD
+    # plot filter limits on PSD
+    ax5.axvline(x=filt[1], linewidth=1, linestyle='dotted', color='r')
+    ax5.axvline(x=filt[2], linewidth=1, linestyle='dotted', color='r')
+    ax5.set_xlim(0.1, int(filt[2]+1))
+    ax5.set_ylabel("PSD, dB",size='small')
+    secax_x5 = ax5.secondary_xaxis('top', functions=(one_over, inverse))        #PSD secondary axis
+    secax_x5.set_xlabel('P e r i o d ,   s', size='small', alpha=0.5, labelpad=-9)
+else:
+    # fourier analysis plot
+    #rfft = np.fft.rfft(rawtrace[0].data)
+    ehzfft = np.fft.rfft(st[2].data)
+    ehnfft = np.fft.rfft(st[1].data)
+    ehefft = np.fft.rfft(st[0].data)
+    xfft = np.fft.rfftfreq(st[0].data.size, d = 1/100)
+    #ax5.plot(xfft, abs(rfft), color='k', lw=1, label='Unfiltered EHZ')
+    ax5.plot(xfft, abs(ehzfft), color='b', lw=1, label='EHZ')
+    ax5.plot(xfft, abs(ehnfft), color='r', lw=1, label='EHN')
+    ax5.plot(xfft, abs(ehefft), color='g', lw=1, label='EHE')
+    ax5.legend(frameon=False, fontsize='x-small')
+    #ax5.set_xscale('log')               #use logarithmic scale on PSD
+    #ax5.set_yscale('linear')
+    #ax5.set_yscale('log')
+    #plot filter limits on PSD
+    ax5.axvline(x=filt[1], linewidth=1, linestyle='dotted', color='r')
+    ax5.axvline(x=filt[2], linewidth=1, linestyle='dotted', color='r')
+    ax5.set_xlim(0.1, int(filt[2])+1)
+    ax5.set_ylabel("FFT",size='small')
 
 #plot background noise limits
 plot_noiselims(ax1, bnZstd, -bnZstd)      # displacement noise limits - comment out if not desired
@@ -432,8 +482,6 @@ secax_x6 = ax6.secondary_xaxis('top')       #Specific Energy secondary axis
 secax_x6.set_xticks(ticks=tticks)
 secax_x6.set_xticklabels(tlabels, size='small', va='center_baseline')
 secax_x6.xaxis.set_minor_locator(AutoMinorLocator(10))
-secax_x5 = ax5.secondary_xaxis('top', functions=(one_over, inverse))        #PSD secondary axis
-secax_x5.set_xlabel('Period, s', size='small', labelpad=-3)
 
 # add grid to graphs
 ax1.grid(color='dimgray', ls = '-.', lw = 0.33)
@@ -534,7 +582,6 @@ ax3.set_ylabel("EHN Velocity, m/s", size='small')
 ax3.set_xlabel('Seconds after Event, s', size='small', labelpad=0)
 ax4.set_ylabel("EHZ Vel. Frequency, Hz", size='small')
 ax4.set_xlabel('Seconds after Start of Trace, s', size='small', labelpad=0)
-ax5.set_ylabel("PSD, dB",size='small')
 ax5.set_xlabel('Frequency, Hz', size='small', labelpad=0)
 ax6.set_ylabel('Specific Energy, J/kg', size='small')
 ax6.set_xlabel('Seconds after Event, s', size='small', labelpad=0)
