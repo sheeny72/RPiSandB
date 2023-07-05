@@ -185,13 +185,13 @@ print("Rayleigh Arrival Time: ", rayt)
 # Calculate Earthquake Total Energy
 qenergy = 10**(1.5*mag+4.8)
 
-# Create output traces
-outst = st.remove_response(inventory=inv,pre_filt=filt,output='VEL',water_level=60, plot=False)
+# Remove instrument response
+st.remove_response(inventory=inv,pre_filt=filt,output='VEL',water_level=60, plot=False)
 
 # Calculate maximums
-e_max = outst[0].max()
-n_max = outst[1].max()
-z_max = outst[2].max()
+e_max = st[0].max()
+n_max = st[1].max()
+z_max = st[2].max()
 se_max = (z_max*z_max+e_max*e_max+n_max*n_max)/2
 
 # Create background noise traces
@@ -217,9 +217,9 @@ for j in range (0, bns):                # find the sample interval with the mini
 bnsestd = (bnZstd*bnZstd+bnEstd*bnEstd+bnNstd*bnNstd)/2           # calculate the max background noise level for the specific energy
 
 # Create Signal Envelopes
-z_env = filter.envelope(outst[2].data)     # create displacement envelope
-e_env = filter.envelope(outst[0].data)     # create velocity envelope
-n_env = filter.envelope(outst[1].data)     # create acceleration envelope
+z_env = filter.envelope(st[2].data)     # create displacement envelope
+e_env = filter.envelope(st[0].data)     # create velocity envelope
+n_env = filter.envelope(st[1].data)     # create acceleration envelope
 se_env=(z_env*z_env+e_env*e_env+n_env*n_env)/2    # create specific energy envelope from velocity envelope! - comment out undesired method.
 
 # set up map plot
@@ -332,17 +332,17 @@ fig.text(0.51, 0.14, 'End: Event time + '+str(bnE)+' s.',size='small')
 fig.text(0.51, 0.13, 'BN Sample size = '+str(bnsamp)+' s.',size='small')
 
 # plot traces
-ax1.plot(st[0].times(reftime=eventTime), outst[2].data, lw=1, color='b')      # displacement waveform
+ax1.plot(st[0].times(reftime=eventTime), st[2].data, lw=1, color='b')      # displacement waveform
 ax1.xaxis.set_minor_locator(AutoMinorLocator(10))
 ax1.yaxis.set_minor_locator(AutoMinorLocator(5))
 # ax1.set_ylim(-2e-8,2e-8)         # set manual y limits for displacement- comment this out for autoscaling
 ax1.margins(x=0)
-ax2.plot(st[0].times(reftime=eventTime), outst[0].data, lw=1, color='g')       # velocity Waveform
+ax2.plot(st[0].times(reftime=eventTime), st[0].data, lw=1, color='g')       # velocity Waveform
 ax2.xaxis.set_minor_locator(AutoMinorLocator(10))
 ax2.yaxis.set_minor_locator(AutoMinorLocator(5))
 # ax2.set_ylim(-1e-7,1e-7)         # set manual y limits for velocity - comment this out for autoscaling
 ax2.margins(x=0)
-ax3.plot(st[0].times(reftime=eventTime), outst[1].data, lw=1, color='r')       # acceleration waveform
+ax3.plot(st[0].times(reftime=eventTime), st[1].data, lw=1, color='r')       # acceleration waveform
 ax3.xaxis.set_minor_locator(AutoMinorLocator(10))
 ax3.yaxis.set_minor_locator(AutoMinorLocator(5))
 # ax3.set_ylim(-5e-7,5e-7)         # set manual y limits for acceleration - comment this out for auto scaling
@@ -354,7 +354,7 @@ ax4.set_ylim(0.5,50)              # limits for log scale
 # plot filter limits on spectrogram
 ax4.axhline(y=filt[1], lw=1, color='r', linestyle='dotted')
 ax4.axhline(y=filt[2], lw=1, color='r', linestyle='dotted')
-ax6.plot(st[0].times(reftime=eventTime), (outst[0].data*outst[0].data+outst[1].data*outst[1].data+outst[2].data*outst[2].data)/2, lw=1, color='purple', linestyle=':')  #specific kinetic energy Waveform
+ax6.plot(st[0].times(reftime=eventTime), (st[0].data*st[0].data+st[1].data*st[1].data+st[2].data*st[2].data)/2, lw=1, color='purple', linestyle=':')  #specific kinetic energy Waveform
 ax6.xaxis.set_minor_locator(AutoMinorLocator(10))
 ax6.yaxis.set_minor_locator(AutoMinorLocator(5))
 # ax6.set_ylim(0,5e-15)         # set manual y limits for energy - comment this out for autoscaling
