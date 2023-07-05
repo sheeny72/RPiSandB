@@ -331,12 +331,6 @@ fig.text(0.51, 0.15, 'Start: Event time - '+str(bnS)+' s.',size='small')
 fig.text(0.51, 0.14, 'End: Event time + '+str(bnE)+' s.',size='small')
 fig.text(0.51, 0.13, 'BN Sample size = '+str(bnsamp)+' s.',size='small')
 
-# calculate NFFT for PSD
-if duration >= 82:
-    nfft = 8192
-else:
-    nfft = duration*100
-
 # plot traces
 ax1.plot(st[0].times(reftime=eventTime), outst[2].data, lw=1, color='b')      # displacement waveform
 ax1.xaxis.set_minor_locator(AutoMinorLocator(10))
