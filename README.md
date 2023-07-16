@@ -152,3 +152,52 @@ Figure and Axes Text.
 Example output files:
 M6.9Quake Tonga Islandsrs2023mwwzcd20230702 102743 UTCRB59E All.png
 M6.9Quake Tonga Islandsrs2023mwwzcd20230702 102743 UTCRB59E P P P pP pP pP pP sP sP sP sP sP.png
+
+# QR11any.py
+This code can be run on any Raspberry Shake or Raspberry Shake and Boom on the Raspberry Shake Network.
+It reads the EHZ channel (vertical geophone) which is common to all models (except the Raspberry Boom). Some models may use SHZ instead of EHZ. This is an upgrade of Qreport10any.py.
+
+Output includes:
+Filtered Displacement trace,
+Filtered Velocity trace,
+Filtered acceleration trace,
+Specific Energy trace,
+Unfiltered velocity spectrogram,
+a choice of:
+Power Spectral Density plot (of filtered displacement, velocity, acceleration and jerk and optionally unfiltered velocity); or
+FFT Spectrum plot of (of filtered displacement, velocity, acceleration and/or jerk and optionally unfiltered velocity,
+Spherical Ray Path Plot,
+Nearside Perspective Map Plot,
+Background Noise in/at the station at the time of the event,
+trace maxima for filtered displacement, velocity, acceleration, specific energy and jerk,
+Signal to noise ratios for filtered displacement, velocity, acceleration and specific energy plots,
+Phase arrival times,
+Percentage vertical component of the phase arrival,
+Event details,
+Quake Energy,
+Phase key,
+Notes.
+
+The background noise limits and Specific Energy plot were developed to assist identification of weak arrivals.
+
+Copy and save the files "RS logo.png" and "twitter logo.png" to the same location as QR11any.
+
+Most plot information is entered in lines 102 to 141.
+Bandpass Filter corners are specified in lines 152 to 166.
+
+The program demonstrates:
+Reading station traces,
+Selecting the active epoch from inventory data,
+Removing instrument response,
+Trace manipulation/calculations,
+Differentiation of a Trace,
+Secondary axes,
+Plotting arrivals,
+colour coding arrival plots consistent with TAUp,
+calculation and plotting of FFT spectrum,
+automated zooming of nearside perspective map to suit quake/station separation,
+calculation of Rayleigh Surface Wave arrival time,
+Calculation of Infrasound arrival time for correlation of Infrasound for explosive events such as some volcanic eruptions;
+Figure and Axes Text.
+
+Files "M6.3Quake Near Cost of Chiapas, Mexico*.png" are examples of the output.
