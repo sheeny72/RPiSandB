@@ -201,4 +201,12 @@ calculation of Rayleigh Surface Wave arrival time,
 Calculation of Infrasound arrival time for correlation of Infrasound for explosive events such as some volcanic eruptions;
 Figure and Axes Text.
 
+# StreamColours.py
+This is some experimental code to similuate a stream.plot() but with individual colours for each trace.
+The standard stream.plot() function plots all traces the same colour. This allows the user to specify different colours for each trace.
+
+It will run on any Raspberry Shake 3D station. With minimal modification it to could also run on any 4D station.
+
+Coloured Stream Plot.png is an example of the output.
+
 Files "M6.3Quake Near Cost of Chiapas, Mexico*.png" are examples of the output.
