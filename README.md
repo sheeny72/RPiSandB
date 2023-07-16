@@ -196,6 +196,7 @@ Plotting arrivals,
 colour coding arrival plots consistent with TAUp,
 calculation and plotting of FFT spectrum,
 automated zooming of nearside perspective map to suit quake/station separation,
+automatic selection of EHZ or SHZ channel as appropriate (not need to manually change code on error),
 calculation of Rayleigh Surface Wave arrival time,
 Calculation of Infrasound arrival time for correlation of Infrasound for explosive events such as some volcanic eruptions;
 Figure and Axes Text.
