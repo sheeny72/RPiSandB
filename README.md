@@ -202,7 +202,7 @@ Calculation of Infrasound arrival time for correlation of Infrasound for explosi
 Figure and Axes Text.
 
 # StreamColours.py
-This is some experimental code to similuate a stream.plot() but with individual colours for each trace.
+This is some experimental code to simulate a stream.plot() but with individual colours for each trace.
 The standard stream.plot() function plots all traces the same colour. This allows the user to specify different colours for each trace.
 
 It will run on any Raspberry Shake 3D station. With minimal modification it to could also run on any 4D station.
