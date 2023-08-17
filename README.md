@@ -201,6 +201,8 @@ calculation of Rayleigh Surface Wave arrival time,
 Calculation of Infrasound arrival time for correlation of Infrasound for explosive events such as some volcanic eruptions;
 Figure and Axes Text.
 
+Example output files are M6.3Quake Near Coast of Chiapas, Mexico*.png.
+
 # StreamColours.py
 This is some experimental code to simulate a stream.plot() but with individual colours for each trace.
 The standard stream.plot() function plots all traces the same colour. This allows the user to specify different colours for each trace.
@@ -208,3 +210,54 @@ The standard stream.plot() function plots all traces the same colour. This allow
 It will run on any Raspberry Shake 3D station. With minimal modification it to could also run on any 4D station.
 
 Coloured Stream Plot.png is an example of the output.
+
+# QR12any.py
+This code can be run on any Raspberry Shake or Raspberry Shake and Boom on the Raspberry Shake Network.
+It reads the EHZ channel (vertical geophone) which is common to all models (except the Raspberry Boom). Some models may use SHZ instead of EHZ. This is an upgrade of QReport10any.py and QR11any.py.
+
+Output includes:
+Filtered Displacement trace,
+Filtered Velocity trace,
+Filtered Acceleration trace,
+Filtered Jerk trace,
+Specific Energy trace,
+Unfiltered velocity spectrogram,
+Power Spectral Density plot (of filtered displacement, velocity, acceleration and jerk and optionally unfiltered velocity),
+FFT Spectrum plot of (of filtered displacement, velocity, acceleration and/or jerk and optionally unfiltered velocity),
+Spherical Ray Path Plot,
+Nearside Perspective Map Plot,
+Background Noise in/at the station at the time of the event,
+trace maxima for filtered displacement, velocity, acceleration, specific energy and jerk,
+Signal to noise ratios for filtered displacement, velocity, acceleration and specific energy plots,
+Phase arrival times,
+Percentage vertical component of the phase arrival,
+Event details,
+Quake Energy,
+Phase key,
+Notes.
+
+The background noise limits and Specific Energy plot were developed to assist identification of weak arrivals.
+
+Copy and save the file "RS logo.png" to the same location as QR12any.
+
+Most plot information is entered in lines 104 to 143.
+Bandpass Filter corners are specified in lines 154 to 168.
+
+The program demonstrates:
+Reading station traces,
+Selecting the active epoch from inventory data,
+Removing instrument response,
+Trace manipulation/calculations,
+Differentiation of a Trace,
+Secondary axes,
+Plotting arrivals,
+colour coding arrival plots consistent with TAUp,
+calculation and plotting of FFT spectrum,
+use of gridspec to similate a stream plot with different colours for each trace,
+automated zooming of nearside perspective map to suit quake/station separation,
+automatic selection of EHZ or SHZ channel as appropriate (no need to manually change code on error),
+calculation of Rayleigh Surface Wave arrival time,
+Calculation of Infrasound arrival time for correlation of Infrasound for explosive events such as some volcanic eruptions;
+Figure and Axes Text.
+
+Example output files are M6.5Quake Vanuatu Islands*.png
