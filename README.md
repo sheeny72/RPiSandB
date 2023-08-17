@@ -208,5 +208,3 @@ The standard stream.plot() function plots all traces the same colour. This allow
 It will run on any Raspberry Shake 3D station. With minimal modification it to could also run on any 4D station.
 
 Coloured Stream Plot.png is an example of the output.
-
-Files "M6.3Quake Near Cost of Chiapas, Mexico*.png" are examples of the output.
