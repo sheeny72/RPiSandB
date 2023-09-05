@@ -234,6 +234,7 @@ Percentage vertical component of the phase arrival,
 Event details,
 Quake Energy,
 Phase key,
+Text for Social Media (Twitter) post (to copy),
 Notes.
 
 The background noise limits and Specific Energy plot were developed to assist identification of weak arrivals.
@@ -246,6 +247,7 @@ Bandpass Filter corners are specified in lines 154 to 168.
 The program demonstrates:
 Reading station traces,
 Selecting the active epoch from inventory data,
+Distiguishing a Raspberry Shake and Boom from a Raspberry Shake,
 Removing instrument response,
 Trace manipulation/calculations,
 Differentiation of a Trace,
