@@ -102,17 +102,18 @@ def sax(secax, tix):    #pass secondary axis, and ticks
     secax.xaxis.set_minor_locator(AutoMinorLocator(10))
     
 #enter event data
-eventTime = UTCDateTime(2023, 8, 17, 17, 4, 49) # (YYYY, m, d, H, M, S) **** Enter data****
-latE = 4.4                                    # quake latitude + N -S **** Enter data****
-lonE = -73.5                                    # quake longitude + E - W **** Enter data****
-depth = 10                             # quake depth, km **** Enter data****
-mag = 6.3                              # quake magnitude **** Enter data****
-eventID = 'rs2023qdvnve'               # ID for the event **** Enter data****
-locE = "Colombia"      # location name **** Enter data****
+eventTime = UTCDateTime(2023, 9, 5, 0, 55, 24) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -23.9                                    # quake latitude + N -S **** Enter data****
+lonE = 175.5                                    # quake longitude + E - W **** Enter data****
+depth = 12                             # quake depth, km **** Enter data****
+mag = 5.7                              # quake magnitude **** Enter data****
+eventID = 'rs2023rlmfev'               # ID for the event **** Enter data****
+locE = "South of Fiji Islands"      # location name **** Enter data****
 
 # set the station name and download the response information
-stn = 'R21C0'      # your station name
-inv = rs.get_stations(network='AM', station=stn, level='RESP')  # get the instrument response
+stn = 'R21C0'      # station name
+nw = 'AM'          # network name
+inv = rs.get_stations(network=nw, station=stn, level='RESP')  # get the instrument response
 k=0
 while True:     #loop until the active epoch is found for the time of the event
     sta = inv[0][k]         #station metadata
@@ -127,12 +128,12 @@ eleS = sta.elevation     #station elevation
 delay = 200                  # delay the start of the plot from the event (seconds) **** Enter data****
 duration = 900               # duration of plots in seconds **** Enter data****
 
+# max note length ------------------------------\n
 notes1 = ""   # add notes to the diagram. max one \n per note.
-#notes1 = "Likely local noise at +1698s. Refer to Spectrogram."     #edit as required - This overwrites the previous line!
+#notes1 = "Likely local noise at +3058s.\nRefer to Spectrogram."     #edit as required - This overwrites the previous line!
 notes2 = ""
 notes3 = ""
-sandb = True        # True if Raspberry Shake and Boom **** Enter data****
-if sandb:
+if sta.channels[0].code =='HDF':    #if the first channels is 'HDF'
     sab = 'Raspberry Shake and Boom'
 else:
     sab = 'Raspberry Shake'
@@ -392,7 +393,6 @@ fig.text(0.53, 0.16, 'Minimum SD over:', size='small')
 fig.text(0.53, 0.15, 'Start: Event time - '+str(bnst)+' s.',size='small')
 fig.text(0.53, 0.14, 'End: Event time + '+str(bne)+' s.',size='small')
 fig.text(0.53, 0.13, 'BN Sample size = '+str(bnsamp)+' s.',size='small')
-
 
 #plot traces
 ax1.plot(trace0[0].times(reftime=eventTime), outdisp[0].data, lw=1, color='b')      # displacement waveform
@@ -706,6 +706,9 @@ if allphases:
 #print filename on bottom left corner of diagram
 filename = pics+'M'+str(mag)+'Quake '+locE+eventID+eventTime.strftime('%Y%m%d %H%M%S UTC'+stn+pfile+'.png')
 fig.text(0.02, 0.01,filename, size='x-small')
+
+#print standard text to copy for posting on Social Media (Twitter)
+print('M'+str(mag)+' #earthquake '+locE+' detected on '+sab+' ('+nw+'.'+stn+') @raspishake #python #CitizenScience #ShakeNet #Obspy @matplotlib #Cartopy ')
 
 # save the final figure if the plot is ready
 if save_plot:
