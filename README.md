@@ -104,7 +104,7 @@ This code can be run on any Raspberry Shake or Raspberry Shake and Boom on the R
 It reads the EHZ (vertical geophone) channel of each station.
 
 Output Includes:
-A Section Plot of Station Traces,
+A Section Plot of Station Velocity Traces,
 A customised map of the area of the stations and the event/earthquake,
 
 This program can be used to plot a section across multiple local stations for a known earthquake,
