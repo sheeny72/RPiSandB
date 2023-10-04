@@ -263,3 +263,20 @@ Calculation of Infrasound arrival time for correlation of Infrasound for explosi
 Figure and Axes Text.
 
 Example output files are M6.5Quake Vanuatu Islands*.png
+
+#LocalStns4.py
+This code can be run on any Raspberry Shake or Raspberry Shake and Boom on the Raspberry Shake Network.
+It reads the EHZ or SHZ (vertical geophone) channel of each station.
+
+Output Includes:
+A Section Plot of Station Displacement Traces,
+A customised map of the area of the stations and the event/earthquake,
+Estimates of the ML for each trace by the Tsuboi Estimation Formula,
+Calculation of the total "quake" energy
+
+This program can be used to plot a section across multiple local stations for a known earthquake,
+or it can also be used to locate an unregistered event such as a small local earthquake, or mine blast
+by trial and error on the event location and timing.
+
+Example output file:
+Moolarben Mine Blast 231003 040950UTC.png
