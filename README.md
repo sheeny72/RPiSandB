@@ -299,5 +299,6 @@ This program can be used to plot a section across multiple local stations for a 
 or it can also be used to locate an unregistered event such as a small local earthquake, or mine blast
 by trial and error on the event location and timing.
 
-Example output file:
+Example output files:
 M2.9 Boggabri Mine Blast 231103 012322UTC.png
+M2.4 Mt Arthur Mine Blast 231103 000138UTC.png
