@@ -264,7 +264,7 @@ Figure and Axes Text.
 
 Example output files are M6.5Quake Vanuatu Islands*.png
 
-#LocalStns4.py
+# LocalStns4.py
 This code can be run on any Raspberry Shake or Raspberry Shake and Boom on the Raspberry Shake Network.
 It reads the EHZ or SHZ (vertical geophone) channel of each station.
 
