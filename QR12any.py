@@ -40,7 +40,10 @@ def plot_arrivals(ax, d1, pt, pb, bottoff):
             if y1 < 0 or y1 < axt/2:                      # alternate top and bottom for phase tags
                 y1 = axt*pt
             else:
-                y1 = axb*pb
+                if bottoff:
+                    y1 = axt*0.1
+                else:
+                    y1 = axb*pb
             ax.text(x1-d1,y1,'Ray', alpha=0.5)   # print the phase name
 
 def time2UTC(a):        #convert time (seconds) since event back to UTCDateTime
@@ -102,13 +105,13 @@ def sax(secax, tix):    #pass secondary axis, and ticks
     secax.xaxis.set_minor_locator(AutoMinorLocator(10))
     
 #enter event data
-eventTime = UTCDateTime(2023, 9, 5, 0, 55, 24) # (YYYY, m, d, H, M, S) **** Enter data****
-latE = -23.9                                    # quake latitude + N -S **** Enter data****
-lonE = 175.5                                    # quake longitude + E - W **** Enter data****
-depth = 12                             # quake depth, km **** Enter data****
-mag = 5.7                              # quake magnitude **** Enter data****
-eventID = 'rs2023rlmfev'               # ID for the event **** Enter data****
-locE = "South of Fiji Islands"      # location name **** Enter data****
+eventTime = UTCDateTime(2023, 11, 1, 21, 4, 46) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -10.0                                    # quake latitude + N -S **** Enter data****
+lonE = 123.7                                    # quake longitude + E - W **** Enter data****
+depth = 36                             # quake depth, km **** Enter data****
+mag = 6.1                              # quake magnitude **** Enter data****
+eventID = 'rs2023vnqrku'               # ID for the event **** Enter data****
+locE = "Timor Region"      # location name **** Enter data****
 
 # set the station name and download the response information
 stn = 'R21C0'      # station name
@@ -130,7 +133,7 @@ duration = 900               # duration of plots in seconds **** Enter data****
 
 # max note length ------------------------------\n
 notes1 = ""   # add notes to the diagram. max one \n per note.
-#notes1 = "Likely local noise at +3058s.\nRefer to Spectrogram."     #edit as required - This overwrites the previous line!
+#notes1 = "Likely local noise at +2316s.\nRefer to Spectrogram."     #edit as required - This overwrites the previous line!
 notes2 = ""
 notes3 = ""
 if sta.channels[0].code =='HDF':    #if the first channels is 'HDF'
@@ -139,7 +142,8 @@ else:
     sab = 'Raspberry Shake'
 
 #set up the traces and ray paths
-plot_envelopes = False          # plot envelopes on traces **** Enter data****
+calcmL = True
+plot_envelopes = False         # plot envelopes on traces **** Enter data****
 allphases = True   # True if all phases to be plotted, otherwise only those in the plotted time window are plotted **** Enter data****
 save_plot = False   # Set to True when plot is readyto be saved **** Enter data****
 
@@ -155,7 +159,7 @@ bnend = eventTime + bne
 # bandpass filter - select to suit system noise and range of quake **** Enter data****
 #filt = [0.09, 0.1, 0.8, 0.9]
 #filt = [0.29, 0.3, 0.8, 0.9]
-#filt = [0.49, 0.5, 2, 2.1]
+#filt = [0.03, 0.033, 2, 2.1]    # use for mL estimates
 filt = [0.69, 0.7, 2, 2.1]       #distant quake
 #filt = [0.69, 0.7, 3, 3.1]
 #filt = [0.69, 0.7, 4, 4.1]
@@ -167,6 +171,7 @@ filt = [0.69, 0.7, 2, 2.1]       #distant quake
 #filt = [0.99, 1, 20, 20.1]
 #filt = [0.69, 0.7, 20, 20.1]
 #filt = [2.99, 3, 20, 20.1]        #use for local quakes
+#filt = [0.09, 0.1, 50, 51]
 
 # set the FDSN server location and channel names
 ch = 'EHZ' # ENx = accelerometer channels; EHx or SHZ = geophone channels
@@ -236,7 +241,9 @@ vel_max = outvel[0].max()
 acc_max = outacc[0].max()
 se_max = vel_max*vel_max/2
 jmax = jerk[0].max()
-#print(jmax)
+mLDv = np.log10(abs(disp_max/1e-6))+2.234*np.log10(distance)-1.198   #calculate estimate magnitude
+mLVv = np.log10(abs(vel_max/1e-6))+2.6225*np.log10(distance)-3.411   #calculate estimate magnitude
+mLAv = np.log10(abs(acc_max/1e-6))+3.146*np.log10(distance)-6.1555   #calculate estimate magnitude
 
 #Create background noise traces
 bndisp = bn0.remove_response(inventory=inv,pre_filt=filt,output='DISP',water_level=60, plot=False) # convert to Disp
@@ -281,7 +288,7 @@ if great_angle_deg < 5:      #set satellite height based on separation
 elif great_angle_deg < 25:
     sat_height = 10000000
 elif great_angle_deg > 120:
-    sat_height = 10000000000000
+    sat_height = 1000000000000
 elif great_angle_deg > 90:
     sat_height = 1000000000
 else:
@@ -291,10 +298,17 @@ latC = (latE+latS)/2        #latitude 1/2 way between station and event/earthqua
 lonC = (lonE+lonS)/2        #longitude 1/2 way between station and event/earthquake - may need adjusting!
 if abs(lonE-lonS) > 180:
     lonC = lonC + 180
-projection=ccrs.NearsidePerspective(
-      central_latitude=latC,
-      central_longitude=lonC,
-      satellite_height=sat_height)      #adjust satellite height to best display station and event/earthquake
+if great_angle_deg > 150:
+    projection = ccrs.Orthographic(
+        central_latitude = latC,
+        central_longitude = lonC)
+    mtext = 'Orthographic projection.'
+else:
+    projection=ccrs.NearsidePerspective(
+        central_latitude=latC,
+        central_longitude=lonC,
+        satellite_height=sat_height)      #adjust satellite height to best display station and event/earthquake
+    mtext = 'Satellite Viewing Height = '+str(int(sat_height/1000))+' km.'
 projection._threshold = projection._threshold/20    #reduce threshold so great circle lines are smooth
 
 # set up plot
@@ -315,9 +329,10 @@ ax8 = fig.add_subplot(gsright[1], projection=projection)    # map
 ax10 = fig.add_subplot(gsright[3])         # FFT
 fig.suptitle("M"+str(mag)+" Earthquake - "+locE+" - "+eventTime.strftime(' %d/%m/%Y %H:%M:%S UTC'), weight='black', color='b', size='x-large')      #Title of the figure
 fig.text(0.05, 0.95, "Filter: "+str(filt[1])+" to "+str(filt[2])+"Hz")          # Filter details
-fig.text(0.52, 0.085, 'Separation =\n'+str(round(great_angle_deg,3))+u"\N{DEGREE SIGN}"+' or '+str(int(distance))+'km.', color = 'b')   #distance between quake and station
-fig.text(0.52, 0.045, 'Latitude: '+str(latE)+u"\N{DEGREE SIGN}"+'\nLongitude: '+str(lonE)+u"\N{DEGREE SIGN}"+'\nDepth: '+str(depth)+'km.')  #quake lat, lon and depth
+fig.text(0.52, 0.07, 'Separation =\n'+str(round(great_angle_deg,3))+u"\N{DEGREE SIGN}"+' or '+str(int(distance))+'km.', color = 'b')   #distance between quake and station
+fig.text(0.52, 0.03, 'Latitude: '+str(latE)+u"\N{DEGREE SIGN}"+'\nLongitude: '+str(lonE)+u"\N{DEGREE SIGN}"+'\nDepth: '+str(depth)+'km.')  #quake lat, lon and depth
 fig.text(0.52, 0.11, 'Quake Energy: '+f"{qenergy:0.1E}"+'J.', color = 'r')        #Earthquake energy
+fig.text(0.52, 0.095, 'Equiv. to '+f"{qenergy/4.18e9:0.1E}"+' t TNT.', color = 'r')
 fig.text(0.7, 0.95, 'Event ID: '+eventID)
 fig.text(0.95, 0.95, 'Station: AM.'+stn+'.00.'+ch, ha='right',size='large')
 fig.text(0.95, 0.935, sab, color='r', ha='right')   # Raspberry Shake and Boom or Raspberry Shake
@@ -331,7 +346,7 @@ fig.text(0.98, 0.83, '#Obspy', ha='right')
 fig.text(0.98, 0.815, '#Cartopy', ha='right')
 
 # Set Directory for output Plots
-pics = "D:/Pictures/Raspberry Shake and Boom/"      # Edit to suit **** Enter data****
+pics = "D:/Pictures/Raspberry Shake and Boom/2023/"      # Edit to suit **** Enter data****
 
 # plot logos
 rsl = plt.imread("RS logo.png")
@@ -340,7 +355,7 @@ newaxr.imshow(rsl)
 newaxr.axis('off')
 
 #perspective map viewing height
-fig.text(0.90, 0.37, 'Satellite Viewing Height = '+str(int(sat_height/1000))+' km.', rotation=90, size='x-small')
+fig.text(0.90, 0.37, mtext, rotation=90, size='x-small')
 
 #print notes
 fig.text(0.91, 0.37, 'NOTES:  '+notes1, rotation=90)                 # add any notes about the report **** Enter data****
@@ -363,6 +378,10 @@ fig.text(0.51, 0.28, 'Max SE = '+f"{se_max:.3E}"+' J/kg', size='small',rotation=
 fig.text(0.5, 0.11, 'Unfiltered Spectrogram', size='x-small', rotation=90, va='center')
 fig.text(0.5, 0.455, 'Max Jerk =', size='small', rotation=90, color='purple', va='center')
 fig.text(0.507, 0.455, f"{jmax:.3E}"+' m/s³', size='small', rotation=90, color='purple', va='center')
+if calcmL:
+    fig.text(0.52, 0.85, 'MLDv = '+str(np.round(mLDv,1)), size='small',rotation=90, va='center')
+    fig.text(0.52, 0.72, 'MLVv = '+str(np.round(mLVv,1)), size='small',rotation=90, va='center')
+    fig.text(0.52, 0.58, 'MLAv = '+str(np.round(mLAv,1)), size='small',rotation=90, va='center')
 
 # print signal to noise ratios
 fig.text(0.515, 0.85, 'S/N = '+f"{abs(disp_max/(3*bndispstd)):.3}", size='x-small', rotation=90, va='center', color='b')
@@ -707,8 +726,12 @@ if allphases:
 filename = pics+'M'+str(mag)+'Quake '+locE+eventID+eventTime.strftime('%Y%m%d %H%M%S UTC'+stn+pfile+'.png')
 fig.text(0.02, 0.01,filename, size='x-small')
 
+# add github repository address for code
+fig.text(0.98, 0.01,'https://github.com/sheeny72/RPiSandB', size='x-small', ha='right')
+
+
 #print standard text to copy for posting on Social Media (Twitter)
-print('M'+str(mag)+' #earthquake '+locE+' detected on '+sab+' ('+nw+'.'+stn+') @raspishake #python #CitizenScience #ShakeNet #Obspy @matplotlib #Cartopy ')
+print('M'+str(mag)+' #earthquake '+locE+' detected on '+sab+' ('+nw+'.'+stn+'.00.'+ch+') @raspishake #python #CitizenScience #ShakeNet #Obspy @matplotlib #Cartopy ')
 
 # save the final figure if the plot is ready
 if save_plot:
