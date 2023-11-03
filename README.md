@@ -304,6 +304,6 @@ M2.9 Boggabri Mine Blast 231103 012322UTC.png
 M2.4 Mt Arthur Mine Blast 231103 000138UTC.png
 
 # Event Data 2023.py
-Selected earthquake event data saved by simply copy and paste direct from my programs.
+Selected earthquake event data saved by simple copy and paste direct from my programs.
 
-As all my programs use the same data format and variable names, this is a simple way to save the data in a readable form, to be able to retrieve the data simply to rerun a report of apply a new report to and old event.
+As all my programs use the same data format and variable names, this is a simple way to save the data in a readable (if verbose) form, to be able to retrieve the data simply to rerun a report of apply a new report to and old event.
