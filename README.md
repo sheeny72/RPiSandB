@@ -234,6 +234,7 @@ Percentage vertical component of the phase arrival,
 Event details,
 Quake Energy,
 Phase key,
+Estimations of the earthquake magnitude calculated from the maximum displacement (MLDv), veloity (MLVv) and Acceleration (MLAv) amplitudes. These can be turned off when not required.
 Text for Social Media (Twitter) post (to copy),
 Notes.
 
@@ -263,6 +264,7 @@ Calculation of Infrasound arrival time for correlation of Infrasound for explosi
 Figure and Axes Text.
 
 Example output files are M6.5Quake Vanuatu Islands*.png
+Latest example file showing estimated earthquake magnitudes is 
 
 # LocalStns4.py
 This code can be run on any Raspberry Shake or Raspberry Shake and Boom on the Raspberry Shake Network.
@@ -280,3 +282,22 @@ by trial and error on the event location and timing.
 
 Example output file:
 Moolarben Mine Blast 231003 040950UTC.png
+
+# LocalStns5.py
+This code can be run on any Raspberry Shake or Raspberry Shake and Boom on the Raspberry Shake Network.
+It reads the EHZ or SHZ (vertical geophone) channel of each station.
+
+This is an upgrade of LocalStns4 in that the map extents have been modified to automatically adjust depending on the quake location and the stations selected for the section plot. The formula for estimating the magnitudes has also been updated.
+
+Output Includes:
+A Section Plot of Station Displacement Traces,
+A customised map of the area of the stations and the event/earthquake,
+Estimates of the MLDv for each trace by the modified Tsuboi Estimation Formula,
+Calculation of the total "quake" energy
+
+This program can be used to plot a section across multiple local stations for a known earthquake,
+or it can also be used to locate an unregistered event such as a small local earthquake, or mine blast
+by trial and error on the event location and timing.
+
+Example output file:
+M2.9 Boggabri Mine Blast 231103 012322UTC.png
