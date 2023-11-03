@@ -264,7 +264,7 @@ Calculation of Infrasound arrival time for correlation of Infrasound for explosi
 Figure and Axes Text.
 
 Example output files are M6.5Quake Vanuatu Islands*.png
-Latest example file showing estimated earthquake magnitudes is 
+Latest example file showing estimated earthquake magnitudes is M6.1Quake Timor Region*.png
 
 # LocalStns4.py
 This code can be run on any Raspberry Shake or Raspberry Shake and Boom on the Raspberry Shake Network.
