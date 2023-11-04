@@ -306,4 +306,12 @@ M2.4 Mt Arthur Mine Blast 231103 000138UTC.png
 # Event Data 2023.py
 Selected earthquake event data saved by simple copy and paste direct from my programs.
 
+# MLAv, MLDv, MLVv
+Results of empirical formulae for estimating earthquake magnitude from maximum acceleration (MLAv), velocity (MLVv) and displacement (MLDv) amplitude on the vertical geophone (EHZ or SHZ) in any Raspberry Shake.
+Assumes a lower bandpass filter of 0.7Hz (though 1Hz works OK) and the upper bandpass filter frequency must be high enough not to clip too much signal.
+
+# Estimating Earthquake Magnitudes
+Discussion of estimation of earthquake magnitudes for small, local earthquakes using the vertical geophone signal (EHZ or SHZ) in any Raspberry Shake.
+
+
 As all my programs use the same data format and variable names, this is a simple way to save the data in a readable (if verbose) form, to be able to retrieve the data simply to rerun a report of apply a new report to and old event.
