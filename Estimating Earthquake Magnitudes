@@ -1,0 +1,96 @@
+# Estimating Earthquake Magnitudes using a Raspberry Shake Vertical Geophone (EHZ or SHZ)
+
+I started to research methods for estimating quake magnitude when I started detecting small local earthquakes (often they were mine blasts) not registered by any seismic network.
+I wanted to know how big they were.
+
+Initially I looked at the original Richter Scale, but it wasn't suitable in that it was designed for a specific type of horizontal drum seismograph and also specific to California.
+
+Eventually I found the Tsuboi Estimation method. The Tsuboi method is used by the University of Tokyo to quickly estimate earthquake magnitude for rapid Tsunami warning.
+Initial trials found that it significantly underestimated the earthquake magnitude when applied to my normal Raspberry Shake seismograms.
+Further research revealed that the Tsuboi method requires a low bandpass frequency of P = 30s or f = 0.033Hz).
+This was much lower than I would normally use on the Raspberry Shake.
+
+When I tried to use a lower bandpass filter frequency of 0.033Hz I found that even moderately sized earthquake signals were lost in the noise, and consequently the magnitudes were over estimated (inflated by the noise).
+Clearly, the Tsuboi mthod was aimed at assessing large quakes for tsunami hazard, so small and moderate size quakes were not important.
+So the Tsuboi method in its strictest form was unsuitable for my needs.
+
+However, all the earthquake estimation methods used today are empirical formulae, so why not develop my own to suit my needs?
+
+I transferred data from my reports taken over 2022 and 2023 to date for data analysis to produce my own formulae.
+Data included: Published magnitude, Distance between station and quake, upper and lower bandpass filter frequencies, quake depth, and maximum amplitude of displacement, velocity and acceleration seismograms and peak specific energy.
+With experience in Design of Experiments, I considered doing analysis to determine which combination of all the above would work best, however, as a first step decided to adjust the coefficients in the Tsuboi Estimation Method formula as this is consistent with many other estimation methods. Why reinvent the wheel?
+
+I collected 403 datasets of unique earthquake / station pairs ranging from M1.4 to M7.8 after discarding any datasets where the maximum value was likely to be noise.
+
+For each dataset, I calculated an estimated magnitude based on a formula of the same format as the Tsuboi Method, and plotted these (y axis) against the Publish Magnitude (x axis) for the quake. I then adjusted the coefficients of the equation until the trend line through the scatter chart equalled y = x + 0 to 3 decimal places.
+This should result in the best fit of coefficients for the estimation equation.
+
+I also calculated the difference (error) between the calculated and published magnitudes for each dataset, and calculated the standard deviation of the errors.
+Assuming a normal distribution, the overall error for the formula can be calculated from 3 times the standard deviation.
+
+Once this was done for displacement (consistent with the Tsuboi Method), the same process was repeated for velocity and acceleration to produce formulae for use when these are the chosen seismogram units.
+
+A note on naming of the estimates: ML was chosen as this seems standard for many estimation methods, but particularly the Tsuboi method. The D, V, or A of course, represent Displacement, Velocity or Acceleration respectively, and the v denotes that the seismogram must be a vertical one (preferably from the vertical geophone).
+
+# MLDv (refer to MLDV.png)
+
+MLDv = log(D/0.000001) + 2.234log(d) - 1.199
+
+where:
+
+D =  maximum Displacement amplitude in metres
+
+d = distance between the station and the earthquake in kilometres.
+
+log( = base 10 logarithm
+
+MLDv error = +/- 1.4 magnitudes.
+
+# MLVv (refer to MLVv.png)
+
+MLVv = log(V/0.000001) + 2.6235log(d) - 3.415
+
+where:
+
+V = maximum Velocity amplitude in metres per second.
+
+d = distance between the station and the earthquake in kilometres.
+
+log( = base 10 logarithm
+
+MLVv error = +/- 1.56 magnitudes.
+
+# MLAv (refer to MLAv.png)
+
+MLAv = log(A/0.000001) + 3.146log(d) - 6.154
+
+where:
+
+A = maximum Velocity amplitude in metres per second per second.
+
+d = distance between the station and the earthquake in kilometres.
+
+log( = base 10 logarithm
+
+MLAv error = +/- 1.89 magnitudes.
+
+# Estimation Errors
+Obviously MLDv has the least error involved in the estimate. This is a result of:
+
+Where peaks of the same amplitude in a velocity signal are of the same energy regardless of frequency, displacement biases the low frequencies, and acceleration biases the higher frequencies.
+Local or cultural noise if often at higher frequencies than the quake signal, though for strong quake signals the frequencies overlap.
+Higher frequencies in the signal are also more readily attenuated with distance and also some materials.
+As a result, signals that bias the higher frequencies have greater variability (error) than those that don't.
+
+The same arguments can be used to suggest that the variability or error in these formulae is greater than in the original Tsuboi Estimation Method, however, in order to detect the small local quakes, it is necessary to filter out the low frequency background (>0.033Hz and <0.7Hz) and unfortunately this means the estimation errors increase.
+
+It may turn out that these formulae are specific to Southeast Australia just as the Richter Formula is specific to California, however, it may also prove to be less critical due to the large error band for these formulae.
+
+# Bandpass Filter Frequencies
+
+The lower bandpass filter frequency for these formula should be 0.7Hz, though 1Hz is probably acceptable.
+The upper bandpass filter frequency needs to be high enough not to clip the maximum amplitude significantly. The upper bandpass filter frequency is least critical on MLDv calculations and most critical on MLAv calculations. Trial and error will soon determine what is acceptable in any case but in general if the upper filter frequency is near the top of the spectrogram signal, the calculation should be valid.
+
+# EHZ or SHZ Channels only
+
+These formulae are for application on the signals from the EHZ or SHZ vertical geophone channels only. Horizontal channels will definitely need different coefficients in the formulae. Vertical accelerometer channels may work with these formulae, but the results are not tested and not guaranteed.
