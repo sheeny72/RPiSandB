@@ -7,11 +7,11 @@ Initially I looked at the original Richter Scale, but it wasn't suitable in that
 
 Eventually I found the Tsuboi Estimation method. The Tsuboi method is used by the University of Tokyo to quickly estimate earthquake magnitude for rapid Tsunami warning.
 Initial trials found that it significantly underestimated the earthquake magnitude when applied to my normal Raspberry Shake seismograms.
-Further research revealed that the Tsuboi method requires a low bandpass frequency of P = 30s or f = 0.033Hz).
+Further research revealed that the Tsuboi method requires a low bandpass frequency of (P = 30s or) f = 0.033Hz.
 This was much lower than I would normally use on the Raspberry Shake.
 
 When I tried to use a lower bandpass filter frequency of 0.033Hz I found that even moderately sized earthquake signals were lost in the noise, and consequently the magnitudes were over estimated (inflated by the noise).
-Clearly, the Tsuboi mthod was aimed at assessing large quakes for tsunami hazard, so small and moderate size quakes were not important.
+Clearly, the Tsuboi method was aimed at assessing large quakes for tsunami hazard, so small and moderate size quakes were not important.
 So the Tsuboi method in its strictest form was unsuitable for my needs.
 
 However, all the earthquake estimation methods used today are empirical formulae, so why not develop my own to suit my needs?
