@@ -85,7 +85,7 @@ Obviously MLDv has the least error involved in the estimate. This is a result of
 
 Where peaks of the same amplitude in a velocity signal are of the same energy regardless of frequency, displacement biases the low frequencies, and acceleration biases the higher 
 frequencies.
-Local or cultural noise if often at higher frequencies than the quake signal, though for strong quake signals the frequencies overlap.
+Local or cultural noise is often at higher frequencies than the quake signal, though for strong quake signals the frequencies overlap.
 Higher frequencies in the signal are also more readily attenuated with distance and also some materials.
 As a result, signals that bias the higher frequencies have greater variability (error) than those that don't.
 
