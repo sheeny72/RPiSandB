@@ -319,7 +319,7 @@ It reads the EHZ or HDF channels of a Raspberry Shake and Boom, but other channe
 
 The aim is to compare two waveforms by plotting the PSD and FFT plots for each waveform sample on the same plot.
 
-The code also calculates the difference between the two FFT plots in three different ways. At the time of writing I'm unsure which is correct/valid, so discretion is advised!
+The code also calculates the difference between the two FFT plots as well.
 
 Example output files are: FFT Comspect *.png.
 
