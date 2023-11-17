@@ -313,5 +313,14 @@ Assumes a lower bandpass filter of 0.7Hz (though 1Hz works OK) and the upper ban
 # Estimating Earthquake Magnitudes
 Discussion of estimation of earthquake magnitudes for small, local earthquakes using the vertical geophone signal (EHZ or SHZ) in any Raspberry Shake.
 
+# ComSpect.py
+This code can run on any Raspberry Shake or raspberry Shake and Boom on the Raspberry Shake Network.
+It reads the EHZ or HDF channels of a Raspberry Shake and Boom, but other channels compatible with 3D or 4D shakes can easily be added.
+
+The aim is to compare two waveforms by plotting the PSD and FFT plots for each waveform sample on the same plot.
+
+The code also calculates the difference between the two FFT plots in three different ways. At the time of writing I'm unsure which is correct/valid, so discretion is advised!
+
+Example output files are: FFT Comspect *.png.
 
 As all my programs use the same data format and variable names, this is a simple way to save the data in a readable (if verbose) form, to be able to retrieve the data simply to rerun a report of apply a new report to and old event.
