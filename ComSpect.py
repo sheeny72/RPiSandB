@@ -12,18 +12,7 @@ from obspy.core import UTCDateTime
 import matplotlib.pyplot as plt
 import numpy as np
 
-
 rs = Client('https://data.raspberryshake.org/')
-
-def FFTsub(f1, f2):
-    n = len(f1)
-    diff = []
-    for i in range(0,n):
-        if f1[i] >= f2[i]:
-            diff.append(abs(f1[i]) - abs(f2[i]))
-        else:
-            diff.append(abs(f2[i]) - abs(f1[i]))
-    return diff
 
 # Channel 1 data
 startTime1 = UTCDateTime(2023, 11, 13, 14, 42, 54) # (YYYY, m, d, H, M, S) **** Enter data****
@@ -55,9 +44,9 @@ notes2 = 'M5.7 Quake Kermadec Islands P arrival'
 duration = 90               # duration of plots in seconds **** Enter data****
 end1 = startTime1 + duration
 end2 = startTime2 + duration
-filtered = True
-logspect = False
-filt = [0.69, 0.7, 2, 2.1]
+filtered = False        # True to apply a frequency bandpass filter
+logspect = False        # True to display logarithmic spectrogram Y axes
+filt = [0.69, 0.7, 2, 2.1]      # Enter bandpass filter corners
 
 # calculate spectrum plot limits if filtered
 if filtered:
@@ -94,7 +83,7 @@ ax3 = fig.add_subplot(5, 2, 3)      # waveform 1 spectrogram
 ax4 = fig.add_subplot(5, 2, 4)      # waveform 2 spectrogram
 ax5 = fig.add_subplot(5, 2, (5,6))      # PSD plots
 ax6 = fig.add_subplot(5, 2, (7,8))      # FFT plots
-ax7 = fig.add_subplot(5, 2, (9,10))     # FFT difference plots
+ax7 = fig.add_subplot(5, 2, (9,10))     # FFT difference plot
 
 #plot traces
 if filtered:
@@ -169,12 +158,8 @@ ax6.set_ylabel("FFT Spectrum",size='small')
 ax6.set_xlabel('F r e q u e n c y ,   H z', size='small', alpha=0.5, labelpad=0)
 
 # fourier difference plot
-dfft = FFTsub(fft1, fft2)
-dfft1 = fft1 - fft2
-dfft2 = abs(fft1) - abs(fft2)
-ax7.plot(xfft, dfft, color='r', lw=1, label='FFT Magnitude Difference')
-ax7.plot(xfft, abs(dfft1), color='purple', lw=1, label='FFT Abs Vector Difference')
-ax7.plot(xfft, abs(dfft2), color='orange', lw=1, label='FFT Arithmetic Abs Difference')
+dfft = abs(fft1) - abs(fft2)
+ax7.plot(xfft, abs(dfft), color='r', lw=1, label='FFT Difference')
 ax7.legend(frameon=False, fontsize='x-small')
 ax7.margins(x=0)
 if filtered:
