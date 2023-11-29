@@ -319,8 +319,8 @@ It reads the EHZ or HDF channels of a Raspberry Shake and Boom, but other channe
 
 The aim is to compare two waveforms by plotting the PSD and FFT plots for each waveform sample on the same plot.
 
-The code also calculates the difference between the two FFT plots as well.
+The code also calculates the difference between the two FFT plots as well. Trending has been added to the FFT difference plot to assist in quantitative and qualitative comparison.
 
-Example output files are: FFT Comspect *.png.
+Example output files are: Log Truck Passing *.png.
 
 As all my programs use the same data format and variable names, this is a simple way to save the data in a readable (if verbose) form, to be able to retrieve the data simply to rerun a report of apply a new report to and old event.
