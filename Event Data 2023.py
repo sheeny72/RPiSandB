@@ -1437,3 +1437,35 @@ depth = 238                             # quake depth, km **** Enter data****
 mag = 6.1                              # quake magnitude **** Enter data****
 eventID = 'rs2023yhyvxb'               # ID for the event **** Enter data****
 locE = "Tonga Islands"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2023, 12, 11, 13, 39, 42) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -60.3                                    # quake latitude + N -S **** Enter data****
+lonE = -33.0                                    # quake longitude + E - W **** Enter data****
+depth = 10                             # quake depth, km **** Enter data****
+mag = 5.7                              # quake magnitude **** Enter data****
+eventID = 'rs2023yimzcw'               # ID for the event **** Enter data****
+locE = "Scotia Sea"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2023, 12, 12, 19, 9, 7) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -33.47                                    # quake latitude + N -S **** Enter data****
+lonE = 149.0                                    # quake longitude + E - W **** Enter data****
+depth = 0                             # quake depth, km **** Enter data****
+mag = 1.5                              # quake magnitude **** Enter data****
+eventID = 'unknown'               # ID for the event **** Enter data****
+locE = "Cadia Gold Mine, Panuara, NSW, Australia"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2023, 12, 13, 2, 55, 6) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -32.52                                    # quake latitude + N -S **** Enter data****
+lonE = 151.02                                    # quake longitude + E - W **** Enter data****
+depth = 0                             # quake depth, km **** Enter data****
+mag = 2.6                              # quake magnitude **** Enter data****
+eventID = 'unknown'               # ID for the event **** Enter data****
+locE = "Warkworth, NSW, Australia"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2023, 12, 21, 14, 55, 58) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = 51.3                                    # quake latitude + N -S **** Enter data****
+lonE = -175.4                                    # quake longitude + E - W **** Enter data****
+depth = 30                             # quake depth, km **** Enter data****
+mag = 6.1                              # quake magnitude **** Enter data****
+eventID = 'rs2023zaytpi'               # ID for the event **** Enter data****
+locE = "Andreanof Islands, Aleutian Islands"      # location name **** Enter data****
