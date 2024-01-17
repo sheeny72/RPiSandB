@@ -334,7 +334,7 @@ It's purpose is to read the background noise level on the channel and calculate 
 It calculates the background noise level as 3x the standard deviation of the signal. This is done for both the whole test period and a smaller sample representing the minimum SD for that test period.
 Hence the whole test period includes any local noise, of short duration, where the smaller sample is intended to pick up the minimum base level noise without transients.
 
-The formulae used to estimate the earthquake magnitudes are the the empiric formulae for mLDv, mLVv and mLAv based on modified Tsuboi method (adjusted for 0.7Hx lower bandpass frequency).
+The formulae used to estimate the earthquake magnitudes are the the empirical formulae for mLDv, mLVv and mLAv based on modified Tsuboi method (adjusted for 0.7Hx lower bandpass frequency).
 
 Output includes:
 Unfiltered Waveform,
@@ -346,7 +346,7 @@ Filtered Spectrogram,
 Plot of the Earthquake Magnitude Limit v Distance.
 
 This tool can be used to:
-Compare outputs (DISP, VEL, or ACC) to determine which is most suitable to give the best signal to noise ratio;
+Compare outputs (DISP, VEL, or ACC) to determine which is most suitable to give the best signal to noise ratio given the frequencies found in the background noise;
 Compare diurnal effects;
 Compare old versus new shake location or installation (such as moving the shake or new or modified vault);
 Compare different stations (e.g. compare city v country installations).
