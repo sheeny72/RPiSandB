@@ -325,7 +325,7 @@ Example output files are: Log Truck Passing *.png.
 
 As all my programs use the same data format and variable names, this is a simple way to save the data in a readable (if verbose) form, to be able to retrieve the data simply to rerun a report of apply a new report to and old event.
 
-# Maglimit.py
+# MagLimit.py
 This code can be run on any Raspberry Shake on the Raspberry Shake Network.
 It reads the EHZ or SHZ vertical geophone channel.
 While it could be run on other channels (horizontal geophones or accelerometer channels) for comparison purposes, the estimated magnitude limits would not necessarily be numerically meaningful.
