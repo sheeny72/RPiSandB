@@ -324,3 +324,35 @@ The code also calculates the difference between the two FFT plots as well. Trend
 Example output files are: Log Truck Passing *.png.
 
 As all my programs use the same data format and variable names, this is a simple way to save the data in a readable (if verbose) form, to be able to retrieve the data simply to rerun a report of apply a new report to and old event.
+
+# Maglimit.py
+This code can be run on any Raspberry Shake on the Raspberry Shake Network.
+It reads the EHZ or SHZ vertical geophone channel.
+While it could be run on other channels (horizontal geophones or accelerometer channels) for comparison purposes, the estimated magnitude limits would not necessarily be numerically meaningful.
+
+It's purpose is to read the background noise level on the channel and calculate the earthquake magnitude limits of what is detectible on the Shake.
+It calculates the background noise level as 3x the standard deviation of the signal. This is done for both the whole test period and a smaller sample representing the minimum SD for that test period.
+Hence the whole test period includes any local noise, of short duration, where the smaller sample is intended to pick up the minimum base level noise without transients.
+
+The formulae used to estimate the earthquake magnitudes are the the empiric formulae for mLDv, mLVv and mLAv based on modified Tsuboi method (adjusted for 0.7Hx lower bandpass frequency).
+
+Output includes:
+Unfiltered Waveform,
+Unfiltered PSD,
+Unfilterd Spectrigram,
+Filtered Waveform,
+Filtered PSD,
+Filtered Spectrogram,
+Plot of the Earthquake Magnitude Limit v Distance.
+
+This tool can be used to:
+Compare outputs (DISP, VEL, or ACC) to determine which is most suitable to give the best signal to noise ratio;
+Compare diurnal effects;
+Compare old versus new shake location or installation (such as moving the shake or new or modified vault);
+Compare different stations (e.g. compare city v country installations).
+
+The Earthquake Magnitude Limit plot has fixed graph limits so plots can readily be compared by flicking between images.
+
+Example output files are:
+R21C0VEL*.png
+RE900VEL*.png
