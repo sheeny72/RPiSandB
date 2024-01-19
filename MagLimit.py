@@ -37,7 +37,8 @@ def grid(ax):   #pass axis
     ax.grid(color='dimgray', which='minor', ls = ':', lw = 0.33)
 
 bnstart = UTCDateTime(2024, 1, 16, 3, 19, 0) # (YYYY, m, d, H, M, S) **** Enter data****
-bnend = bnstart + 600               
+duration = 600
+bnend = bnstart + duration               
 
 # set the station name and download the response information
 stn = 'R21C0'      # station name
@@ -142,9 +143,9 @@ ax2.plot(bn1[0].times(reftime=bnstart), bn0[0].data, lw=1, color=colour)      # 
 ax2.set_ylabel('Filtered '+heading, size='small') 
 ax2.margins(x=0)
 ax2b, ax2t = ax2.get_ylim()
-ax2.text(300, ax2t*.8, 'Bandpass Filter: '+str(filt[1])+" to "+str(filt[2])+"Hz", ha = 'center')
-ax2.text(300, ax2b*0.7, 'Sample SD = '+f"{bnfstd:.3E}"+',  3SD = '+f"{(3*bnfstd):.3E}", ha = 'center')
-ax2.text(300, ax2b*0.9, 'Test Period SD = '+f"{bnxstd:.3E}"+',  3SD = '+f"{(3*bnxstd):.3E}", ha = 'center')
+ax2.text(duration/2, ax2t*.8, 'Bandpass Filter: '+str(filt[1])+" to "+str(filt[2])+"Hz", ha = 'center')
+ax2.text(duration/2, ax2b*0.7, 'Sample SD = '+f"{bnfstd:.3E}"+',  3SD = '+f"{(3*bnfstd):.3E}", ha = 'center')
+ax2.text(duration/2, ax2b*0.9, 'Test Period SD = '+f"{bnxstd:.3E}"+',  3SD = '+f"{(3*bnxstd):.3E}", ha = 'center')
 ax2.axvline(x=bnftime-bnstart, linewidth=1, linestyle='dotted', color='k')
 ax2.axvline(x=(bnftime-bnstart)+bnsamp, linewidth=1, linestyle='dotted', color='k')
 ax2.text(bnftime-bnstart+bnsamp/2, 0, 'Sample', size = 'xx-large', alpha = 0.5, rotation = 90, ha = 'center', va = 'center')
