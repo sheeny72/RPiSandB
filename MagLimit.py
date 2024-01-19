@@ -55,7 +55,7 @@ filt = [0.69, 0.7, 2, 2.1]       #distant quake
 #filt = [0.69, 0.7, 6, 6.1]
 #filt = [0.69, 0.7, 8, 8.1]
 #filt = [0.69, 0.7, 10, 10.1]
-filt = [0.69, 0.7, 20, 20.1]
+#filt = [0.69, 0.7, 20, 20.1]
 #filt = [0.69, 0.7, 49, 50]
 
 #get waveform for background noise and copy it for independent removal of instrument response
@@ -83,35 +83,43 @@ for j in range (0, bns):                #find the sample interval with the minim
 
 mv = [] 
 mLv = []
+errh = []
+errl = []
 dist = []
 
-for d in range (0,120):
+for d in range (0,170):
     dist.append((d+1)*100)
     if oput == 'DISP':
         mLv.append(np.log10(abs(bnfstd*3/1e-6))+2.234*np.log10(dist[d])-1.199)   #calculate estimate magnitude
         mv.append(np.log10(abs(bnxstd*3/1e-6))+2.234*np.log10(dist[d])-1.199)   #calculate estimate magnitude
+        errl.append(mLv[d]-1.4)
+        errh.append(mv[d]+1.4)
     elif oput == 'ACC':
         mLv.append(np.log10(abs(bnfstd*3/1e-6))+3.146*np.log10(dist[d])-6.154)   #calculate estimate magnitude
         mv.append(np.log10(abs(bnxstd*3/1e-6))+3.146*np.log10(dist[d])-6.154)   #calculate estimate magnitude
+        errl.append(mLv[d]-1.56)
+        errh.append(mv[d]+1.56)
     else:
         mLv.append(np.log10(abs(bnfstd*3/1e-6))+2.6235*np.log10(dist[d])-3.415)   #calculate estimate magnitude
         mv.append(np.log10(abs(bnxstd*3/1e-6))+2.6235*np.log10(dist[d])-3.415)   #calculate estimate magnitude
+        errl.append(mLv[d]-1.88)
+        errh.append(mv[d]+1.88)
 
 if oput == 'DISP':
     colour = 'b'
     ml = 'mLDv'
     heading = 'Displacement, m'
-    eq = 'mLDv = log10(abs(max(D)/1e-6))+2.234*log10(distance)-1.199'
+    eq = 'mLDv = log10(abs(max(D)/1e-6))+2.234*log10(distance)-1.199 +/- 1.4'
 elif oput =='ACC':
     colour = 'r'
     ml = 'mLAv'
     heading = 'Acceleration, m/s²'
-    eq = 'mLAv = log10(abs(max(A)/1e-6))+3.146*log10(distance)-6.154'
+    eq = 'mLAv = log10(abs(max(A)/1e-6))+3.146*log10(distance)-6.154 +/- 1.88'
 else:
     colour = 'g'
     ml = 'mLVv'
     heading = 'Velocity, m/s'
-    eq = 'mLVv = log10(abs(max(V)/1e-6))+2.6235*log10(distance)-3.415'
+    eq = 'mLVv = log10(abs(max(V)/1e-6))+2.6235*log10(distance)-3.415 +/- 1.56'
         
 fig = plt.figure(figsize=(20, 14), dpi=150)       # set to page size in inches
 ax1 = fig.add_subplot(5,2,1)            # raw waveform
@@ -168,20 +176,23 @@ ax6.set_ylabel("Filtered Spectrogram",size='small')
 
 ax7.plot(dist, mLv, lw=1, color=colour, label = 'Sample')
 ax7.plot(dist, mv, lw=1, color=colour, linestyle = '--', label = 'Test Period')
+ax7.plot(dist, errl, lw=1, color=colour, linestyle = ':', label = 'Error Band')
+ax7.plot(dist, errh, lw=1, color=colour, linestyle = ':', label = 'Error Band')
+ax7.fill_between(dist, errl, errh, color=colour, alpha=0.1)
 ax7.set_ylabel(ml,size='small')
 ax7.set_xlabel("Distance, km",size='small')
 ax7.margins(x=0)
 ax7.margins(y=0)
 ax7.set_ylim(0, 9)
-ax7.set_xlim(0, 12000)
+ax7.set_xlim(0, 17000)
 ax7.xaxis.set_minor_locator(AutoMinorLocator(20))
 ax7.yaxis.set_minor_locator(AutoMinorLocator(5))
 grid(ax7)
-ax7.legend(frameon=False, fontsize='x-small')
-ax7.text(500,8, 'Earthquake magnitudes above the line should be detectible.')
-ax7.text(500,7.6, 'Earthquake magnitudes close to the line will have poor signal to noise ratio.')
-ax7.text(8500,1, 'Earthquake magnitudes below the line are not detectible.')
-ax7.text(8100,0.6, eq)
+ax7.legend(frameon=False, fontsize='x-small', loc = 'lower right')
+ax7.text(500,8, '99% of Earthquake magnitudes above the Upper Error Band Line should be detectible.')
+ax7.text(500,7.6, 'Earthquake magnitudes between the error band lines may not be detectible.')
+ax7.text(8500,1, '99% of Earthquake magnitudes below the lower error band line are not detectible.', ha = 'center')
+ax7.text(8500,0.6, eq, ha = 'center')
 
 fig.text(0.05, 0.95, 'Earthquake magnitude estimation formulae based on:') 
 fig.text(0.05, 0.935, 'Lower bandpass filter frequency of 0.7 Hz.')
