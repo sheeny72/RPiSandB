@@ -303,7 +303,7 @@ Example output files:
 M2.9 Boggabri Mine Blast 231103 012322UTC.png
 M2.4 Mt Arthur Mine Blast 231103 000138UTC.png
 
-# Event Data 2023.py
+# Event Data *.py
 Selected earthquake event data saved by simple copy and paste direct from my programs.
 
 # MLAv, MLDv, MLVv
