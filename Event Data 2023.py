@@ -1462,6 +1462,14 @@ mag = 2.6                              # quake magnitude **** Enter data****
 eventID = 'unknown'               # ID for the event **** Enter data****
 locE = "Warkworth, NSW, Australia"      # location name **** Enter data****
 
+eventTime = UTCDateTime(2023, 12, 16, 1, 32, 18) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -34.1409                                    # quake latitude + N -S **** Enter data****
+lonE = 147.516                                    # quake longitude + E - W **** Enter data****
+depth = 10                             # quake depth, km **** Enter data****
+mag = 2.6                              # quake magnitude **** Enter data****
+eventID = 'unknown'               # ID for the event **** Enter data****
+locE = "Barmedman, NSW, Australia"      # location name **** Enter data****
+
 eventTime = UTCDateTime(2023, 12, 21, 14, 55, 58) # (YYYY, m, d, H, M, S) **** Enter data****
 latE = 51.3                                    # quake latitude + N -S **** Enter data****
 lonE = -175.4                                    # quake longitude + E - W **** Enter data****
