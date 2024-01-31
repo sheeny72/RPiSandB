@@ -393,3 +393,59 @@ depth = 37                             # quake depth, km **** Enter data****
 mag = 6.3                              # quake magnitude **** Enter data****
 eventID = 'rs2024bpmyhf'               # ID for the event **** Enter data****
 locE = "Vanuatu Islands"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 1, 25, 4, 2, 20) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -30.64                                    # quake latitude + N -S **** Enter data****
+lonE = 150.19                                    # quake longitude + E - W **** Enter data****
+depth = 0                             # quake depth, km **** Enter data****
+mag = 2.7                              # quake magnitude **** Enter data****
+eventID = 'unknown'               # ID for the event **** Enter data****
+locE = "Tarrawonga Coal Mine, Boggabri, NSW, Australia"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 1, 27, 5, 52, 49) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = 14.1                                    # quake latitude + N -S **** Enter data****
+lonE = -90.5                                    # quake longitude + E - W **** Enter data****
+depth = 108                             # quake depth, km **** Enter data****
+mag = 6.1                              # quake magnitude **** Enter data****
+eventID = 'rs2024bweoyq'               # ID for the event **** Enter data****
+locE = "Guatemala"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 1, 28, 9, 38, 56) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -8.2                                    # quake latitude + N -S **** Enter data****
+lonE = -71.4                                    # quake longitude + E - W **** Enter data****
+depth = 609                             # quake depth, km **** Enter data****
+mag = 6.5                              # quake magnitude **** Enter data****
+eventID = 'rs2024byhurf'               # ID for the event **** Enter data****
+locE = "Western Brazil"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 1, 29, 4, 40, 25) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -32.325                                    # quake latitude + N -S **** Enter data****
+lonE = 149.925                                   # quake longitude + E - W **** Enter data****
+depth = 0                             # quake depth, km **** Enter data****
+mag = 2.2                              # quake magnitude **** Enter data****
+eventID = 'unknown'               # ID for the event **** Enter data****
+locE = "Wilpinjong Coal Mine, Wollar, NSW, Australia"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 1, 30, 1, 7, 28) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -32.315                                    # quake latitude + N -S **** Enter data****
+lonE = 149.839                                    # quake longitude + E - W **** Enter data****
+depth = 0                             # quake depth, km **** Enter data****
+mag = 2.2                              # quake magnitude **** Enter data****
+eventID = 'unknown'               # ID for the event **** Enter data****
+locE = "Wilpinjong Coal Mine, Wilpinjong, NSW, Australia"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 1, 30, 2, 36, 15) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -32.61                                    # quake latitude + N -S **** Enter data****
+lonE = 151.04                                    # quake longitude + E - W **** Enter data****
+depth = 0                             # quake depth, km **** Enter data****
+mag = 2.9                              # quake magnitude **** Enter data****
+eventID = 'unknown'               # ID for the event **** Enter data****
+locE = "Warkworth Coal Mine, Mt Thorley, NSW, Australia"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 1, 30, 3, 0, 20) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -32.34                                    # quake latitude + N -S **** Enter data****
+lonE = 150.87                                    # quake longitude + E - W **** Enter data****
+depth = 0                             # quake depth, km **** Enter data****
+mag = 2.3                              # quake magnitude **** Enter data****
+eventID = 'unknown'               # ID for the event **** Enter data****
+locE = "Mt Arthur Coal Mine, Muswellbrook, NSW, Australia"      # location name **** Enter data****
