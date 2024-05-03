@@ -362,12 +362,12 @@ This code can be run on any Raspberry Shake or Raspberry Shake and Boom on the R
 It reads the EHZ or SHZ (vertical geophone) channel of each station.
 
 This is an upgrade of previous versions in that provision has been made to determine the station to quake distance from the difference in P and S arrival times, and radius circles are plotted.
-The quake location is at the intersection of the circles. The tightness of the intersections gives and indication of the accuracy of the estimation of the position of the quake.
+The quake location is at the intersection of the circles. The tightness of the intersections gives an indication of the accuracy of the estimation of the position of the quake.
 
 Output Includes:
 A Section Plot of Station Displacement, Velocity or Acceleration Traces,
 A customised map of the area of the stations and the event/earthquake,
-Estimates of the MLDv, MLVv and/or MLAv for each trace by the modified Tsuboi Estimation Formula,
+Estimates of the MLDv, MLVv and/or MLAv for each trace,
 Calculation of the total "quake" energy,
 Individual high resolution plots of each trace for estimation of P and S arrival times.
 
@@ -382,15 +382,18 @@ Intended workflow:
 1. Enter EventTime in line 195 at the whole minute 30 to 60s ahead of the observed event on the helicorder.
 2. Set rplots to True, and plotrs to False in lines 204 and 205 respectively.
 3. Select stations to include in the station list in lines 26 to 62.
-4. Run LocalStns7. A high resolution plot of the trace of each station will be produced, along with the final section plot and map.
-5. Refer to each high resolution trace plot and estimate the P and S phase arrival times. Record these in pstimes in lines 64 to 74. Ensure oyu have a pair of times for each station - no more no less. Comment out unwanted lines, or add additional line as required. Where one or both arrivals is NOT clear, consider changing output (e.g. Displacement, velocity, or acceleration) to get clear arrivals. Where one arrival is not clear, correct the timing for this arrival on successive iterations so it is not misleading. DO NOT ADJUST CLEAR ARRIVALS - these are critical to accurate location and timing.
+4. Run LocalStns7. A high resolution plot of the trace of each station will be produced, along with the final section plot and map. Comment out any stations (in lines 26 to 62) that do not produce a useful trace.
+5. Refer to each high resolution trace plot and estimate the P and S phase arrival times. Record these in pstimes in lines 64 to 74. Ensure you have a pair of times for each station - no more no less. Comment out unwanted lines, or add additional lines as required. Where one or both arrivals is NOT clear, consider changing output (e.g. Displacement, velocity, or acceleration) to get clear arrivals. Where one arrival is not clear, correct the timing for this arrival on successive iterations so it is not misleading. DO NOT ADJUST CLEAR ARRIVALS (other than to correct errors) - these are critical to accurate location and timing.
 6. Change plotrs to True on line 205.
-7. Re-run LocalStns7. This time the high resolution trace plots will have the estimated P and S arrival times plotted on them for checking. The Final map will also have circles plotted on it showig how far the quake is from each station. The epicentre will be at the intersection of all the circles.
-8. Adjust the quake latitude (latE) and longitude (longE) to match the intersection of circles in lines 196 and 197.
-9. Adjust the EventTime again to better match the arrivals on the section plot. (Remember to correct the pstimes whenever the EventTime is adjusted. i.e. if EventTime is increased by 18s, decrease the pstimes by 18s!)
-10. Red dots are plotted on the section plot for each station which are the estimated arrival times from the high resolution plots. This is to aid precision in both location and timing adjustments.
-11. Re-run LocalStns7 as many times as required to refine the position and timing of the quake.
-12. Once position and timing of the quake is determined, set rplots to False for subsequent runs so the high resolution trace plots don't have to be produced every time the final plot is produced.
+7. Re-run LocalStns7. This time the high resolution trace plots will have the estimated P and S arrival times plotted on them for checking. The Final map will also have circles plotted on it showin
+8. g how far the quake is from each station. The epicentre will be at the intersection of all the circles.
+9. Adjust the quake latitude (latE) and longitude (longE) to match the intersection of circles in lines 196 and 197.
+10. Adjust the EventTime again to better match the arrivals on the section plot. (Remember to correct the pstimes whenever the EventTime is adjusted. i.e. if EventTime is increased by 18s, decrease the pstimes by 18s!)
+11. Red dots are plotted on the section plot for each station which are the estimated arrival times from the high resolution plots. This is to aid precision in both location and timing adjustments.
+12. Re-run LocalStns7 as many times as required to refine the position and timing of the quake.
+13. Once position and timing of the quake is determined, set rplots to False for subsequent runs so the high resolution trace plots don't have to be produced every time the final plot is produced.
+
+N.B. Each hiresolution trace plot shows the stream index number in the legend to avoid confusion.
 
 Example output files:
 M2.5Quake BHP Mt Arthur Coal Mine, Muswellbrook, NSW, Australiaunknown20240502*.*
