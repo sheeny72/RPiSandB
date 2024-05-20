@@ -9,6 +9,7 @@ Created on Thu Nov 16 10:52:26 2023
 
 from obspy.clients.fdsn import Client
 from obspy.core import UTCDateTime
+from obspy import read_inventory
 import matplotlib.pyplot as plt
 from matplotlib.ticker import AutoMinorLocator
 import numpy as np
@@ -16,7 +17,7 @@ import numpy as np
 rs = Client('https://data.raspberryshake.org/')
 
 # Channel 1 data
-startTime1 = UTCDateTime(2023, 11, 27, 1, 0, 0) # (YYYY, m, d, H, M, S) **** Enter data****
+startTime1 = UTCDateTime(2024, 5, 17, 7, 22, 30) # (YYYY, m, d, H, M, S) **** Enter data****
 
 # set the station name and download the response information
 stn1 = 'R21C0'      # station name
@@ -25,38 +26,51 @@ nw1 = 'AM'          # network name
 #ch1 = ['*HZ', 'VEL', 'm/s.', 'Velocity']
 #ch1 = ['*HZ', 'ACC', 'm/s².', 'Acceleration']
 ch1 = ['HDF', 'DEF', 'Pa.', 'Pressure']
-inv1 = rs.get_stations(network=nw1, station=stn1, level='RESP')  # get the instrument response
-notes1 = 'R21C0 Oberon'
+if stn1 == 'R5968' or stn1 == 'R4FA0':    # read inventory files if online inventory not available
+    f = open(stn1+'.xml')
+    inv = read_inventory(stn1+'.xml')
+    f.close()
+else:
+    inv1 = rs.get_stations(network=nw1, station=stn1, level='RESP')  # get the instrument response
+notes1 = 'R21C0, Wind 2.5 kph, Gust 3.6 kph, 238°'
 
 # Channel 2 data
-startTime2 = UTCDateTime(2023, 11, 27, 1, 0, 0) # (YYYY, m, d, H, M, S) **** Enter data****
+startTime2 = UTCDateTime(2024, 5, 16, 2, 52, 30) # (YYYY, m, d, H, M, S) **** Enter data****
 
 # set the station name and download the response information
-stn2 = 'R571C'      # station name
+stn2 = 'R21C0'      # station name
 nw2 = 'AM'          # network name
 #ch2 = ['*HZ', 'DISP', 'm.', 'Displacement']
 #ch2 = ['*HZ', 'VEL', 'm/s.', 'Velocity']
 #ch2 = ['*HZ', 'ACC', 'm/s².', 'Acceleration']
 ch2 = ['HDF', 'DEF', 'Pa.', 'Pressure']
-inv2 = rs.get_stations(network=nw2, station=stn2, level='RESP')  # get the instrument response
-notes2 = 'R571C Coonabarabran'
+if stn2 == 'R5968' or stn2 == 'R4FA0':    # read inventory files if online inventory not available
+    f = open(stn2+'.xml')
+    inv = read_inventory(stn2+'.xml')
+    f.close()
+else:
+    inv2 = rs.get_stations(network=nw2, station=stn2, level='RESP')  # get the instrument response
+notes2 = 'R21C0, Wind 0, Gust 0'
       
 #Setup the data plot
-duration = 3600               # duration of plots in seconds **** Enter data****
+duration = 300               # duration of plots in seconds **** Enter data****
 end1 = startTime1 + duration
 end2 = startTime2 + duration
 filtered = True        # True to apply a frequency bandpass filter
-logspect = False        # True to display logarithmic spectrogram Y axes
+logspect = True        # True to display logarithmic spectrogram Y axes
 
 #Infrasund Filter bands
 filt = [0.04, 0.05, 49, 50]   # For Booms with 20s mechanical filter fitted
 #filt = [0.04, 0.05, 1, 1.1]
+#filt = [0.19, 0.2, 1, 1.1]     # for wind towers
 #filt = [0.09, 1, 49, 50]      # For all Booms...
 #filt = [0.9, 1, 10, 10.1]
 #filt = [9.9, 10, 20, 20.1]
 #filt = [19.9, 20, 30, 30.1]
 #filt = [29.9, 30, 40, 40.1]
 #filt = [39.9, 40, 49, 50]
+#filt = [39.9, 40, 49, 50]
+#filt = [48.9, 49, 49, 50]
 
 #seismic filter bands
 #filt = [0.04, 0.05, 49, 50]
@@ -148,6 +162,7 @@ if filtered:    # plot filter limits
 if logspect:
     ax3.set_yscale('log')
     ax4.set_yscale('log')
+ax3.set_ylim(0.05, 50)
 ax4.set_ylim(0.05, 50)
 
 #plot PSD
