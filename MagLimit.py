@@ -24,6 +24,7 @@ any magnitude estimates is questionable.
 
 from obspy.clients.fdsn import Client
 from obspy.core import UTCDateTime
+from obspy import read_inventory
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.ticker import AutoMinorLocator
@@ -36,8 +37,8 @@ def grid(ax):   #pass axis
     ax.grid(color='dimgray', ls = '-.', lw = 0.33)
     ax.grid(color='dimgray', which='minor', ls = ':', lw = 0.33)
 
-bnstart = UTCDateTime(2024, 1, 16, 3, 19, 0) # (YYYY, m, d, H, M, S) **** Enter data****
-duration = 600
+bnstart = UTCDateTime(2024, 4, 29, 3, 0, 0) # (YYYY, m, d, H, M, S) **** Enter data****
+duration = 1800
 bnend = bnstart + duration               
 
 # set the station name and download the response information
@@ -47,7 +48,12 @@ ch = '*HZ' # ENx = accelerometer channels; EHx or SHZ = geophone channels... ONL
 #oput = 'DISP'  # output - DISP = Displacement, VEL = Velocity, ACC = Acceleration
 oput = 'VEL'
 #oput = 'ACC'
-inv = rs.get_stations(network=nw, station=stn, level='RESP')  # get the instrument response
+if stn == 'R5968' or stn == 'R4FA0':    # read inventory files if online inventory not available
+    f = open(stn+'.xml')
+    inv = read_inventory(stn+'.xml')
+    f.close()
+else:
+    inv = rs.get_stations(network=nw, station=stn, level='RESP')  # get the instrument response
 
 # bandpass filter - select to suit system noise and range of quake
 filt = [0.69, 0.7, 2, 2.1]       #distant quake
@@ -57,7 +63,7 @@ filt = [0.69, 0.7, 2, 2.1]       #distant quake
 #filt = [0.69, 0.7, 8, 8.1]
 #filt = [0.69, 0.7, 10, 10.1]
 #filt = [0.69, 0.7, 20, 20.1]
-#filt = [0.69, 0.7, 49, 50]
+filt = [0.69, 0.7, 49, 50]
 
 #get waveform for background noise and copy it for independent removal of instrument response
 bn0 = rs.get_waveforms('AM', stn, '00', ch, bnstart, bnend)
