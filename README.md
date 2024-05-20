@@ -399,7 +399,7 @@ N.B. Each high resolution trace plot shows the stream index number in the legend
 This code can be run on any Raspberry Shake or Raspberry Shake and Boom on the Raspberry Shake Network.
 It reads the EHZ or SHZ (vertical geophone) channel of each station.
 
-This is an upgrade of LOcalStns7.py. OpenStreetMap imagery has been added for the background of the map.
+This is an upgrade of LOcalStns7.py. OpenStreetMap imagery has been added for the background of the map and also allows instrument response from local file rather than FDSN server.
 As in LocalStns7.py, provision has been made to determine the station to quake distance from the difference in P and S arrival times, and radius circles are plotted.
 The quake location is at the intersection of the circles. The tightness of the intersections gives an indication of the accuracy of the estimation of the position of the quake.
 
