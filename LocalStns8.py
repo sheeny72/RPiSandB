@@ -9,6 +9,7 @@ from obspy.clients.fdsn import Client
 from obspy.core import UTCDateTime, Stream
 import matplotlib.pyplot as plt
 from obspy.taup import TauPyModel
+from obspy import read_inventory
 import cartopy.crs as ccrs
 from cartopy.io.img_tiles import OSM
 #import cartopy.feature as cfeature
@@ -28,14 +29,15 @@ imagery = OSM()
 # as required to save typing
 def stationList(sl):
     sl += ['R21C0']    #Oberon
-    #sl += ['R5968']    #Oberon
+    #sl += ['R4FA0']    #Oberon
+    sl += ['R5968']    #Oberon
     sl += ['R1564']    #Lithgow
     sl += ['R811A']    #Mudgee
     sl += ['R9AF3']    #Gulgong
     sl += ['R571C']    #Coonabarabran
     sl += ['R6D2A']    #Coonabarabran
     #sl += ['RF35D']    #Narrabri
-    #sl += ['R7AF5']    #Muswellbrook
+    sl += ['R7AF5']    #Muswellbrook
     #sl += ['R26B1']    #Murrumbateman
     #sl += ['R3756']    #Chatswood
     #sl += ['R9475']    #Sydney
@@ -64,13 +66,14 @@ def stationList(sl):
 
 # Build a list of ranges S-P times from hires trace plots
 # format [P time, S10.5],
-pstimes = [[27.5,47.5],
-          [22.5,39.5],
-          [8.5,15],
-          [3.5,6],
-          [22.5,39],
-          [24,42],
-          #[9,15.5],
+pstimes = [[29,49],
+          [29,49.5],
+          [23,39],
+          [25,43.5],
+          [23,40],
+          [38,66.5],
+          [38,67],
+          [8,14.5],
           ]
 
 # Trace plotting routine for determining S - P time
@@ -96,7 +99,12 @@ def buildStream(strm, op, rp):
     n = len(slist)      # n is the number of traces (stations) in the stream
     tr1 = []
     for i in range(0, n):
-        inv = rs.get_stations(network='AM', station=slist[i], level='RESP')  # get the instrument response
+        if slist[i] == 'R5968' or slist[i] == 'R4FA0':    # read inventory files if online inventory not available
+            f = open(slist[i]+'.xml')
+            inv = read_inventory(slist[i]+'.xml')
+            f.close()
+        else:
+            inv = rs.get_stations(network='AM', station=slist[i], level='RESP')  # get the instrument response
         
         #read each epoch to find the one that's active for the event
         k=0
@@ -202,7 +210,7 @@ locE = "Moolarben Coal Mine, Ulan, NSW, Australia"      # location name **** Ent
 
 # perform range estimate plots
 rplots = False       # create hires trace plots for P and S arrival times
-plotrs = True      # plot arrival times on hires plots and radius circles on the map
+plotrs = False      # plot arrival times on hires plots and radius circles on the map
 eq = False          # True if Earthquake, False if Mine Blast or other
 
 # Make a list of stations
@@ -350,7 +358,7 @@ mr = maxlon+0.5    # longitude of the right side of the map
 ax2.set_extent((ml, mr, mb, mt))
 
 # Add the imagery to the map.
-ax2.add_image(imagery, 9)
+ax2.add_image(imagery, 8)
 
 # plot lat lon grid lines
 ax2.gridlines(draw_labels=True)
