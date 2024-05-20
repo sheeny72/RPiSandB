@@ -306,6 +306,8 @@ M2.4 Mt Arthur Mine Blast 231103 000138UTC.png
 # Event Data *.py
 Selected earthquake event data saved by simple copy and paste direct from my programs.
 
+As all my programs use the same data format and variable names, this is a simple way to save the data in a readable (if verbose) form, to be able to retrieve the data simply to rerun a report of apply a new report to and old event.
+
 # MLAv, MLDv, MLVv
 Results of empirical formulae for estimating earthquake magnitude from maximum acceleration (MLAv), velocity (MLVv) and displacement (MLDv) amplitude on the vertical geophone (EHZ or SHZ) in any Raspberry Shake.
 Assumes a lower bandpass filter of 0.7Hz (though 1Hz works OK) and the upper bandpass filter frequency must be high enough not to clip too much signal.
@@ -321,9 +323,9 @@ The aim is to compare two waveforms by plotting the PSD and FFT plots for each w
 
 The code also calculates the difference between the two FFT plots as well. Trending has been added to the FFT difference plot to assist in quantitative and qualitative comparison.
 
-Example output files are: Log Truck Passing *.png.
+This version has now been updated to allow use of local instrument response files if instrument response is unavailable on the FDSN server.
 
-As all my programs use the same data format and variable names, this is a simple way to save the data in a readable (if verbose) form, to be able to retrieve the data simply to rerun a report of apply a new report to and old event.
+Example output files are: Log Truck Passing *.png.
 
 # MagLimit.py
 This code can be run on any Raspberry Shake on the Raspberry Shake Network.
@@ -352,6 +354,8 @@ Compare old versus new shake location or installation (such as moving the shake 
 Compare different stations (e.g. compare city v country installations).
 
 The Earthquake Magnitude Limit plot has fixed graph limits so plots can readily be compared by flicking between images.
+
+This version has now been updated to allow use of local instrument response files if instrument response is unavailable on the FDSN server.
 
 Example output files are:
 R21C0VEL*.png
