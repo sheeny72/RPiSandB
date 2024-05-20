@@ -17,7 +17,7 @@ import numpy as np
 rs = Client('https://data.raspberryshake.org/')
 
 # Channel 1 data
-startTime1 = UTCDateTime(2024, 5, 17, 7, 22, 30) # (YYYY, m, d, H, M, S) **** Enter data****
+startTime1 = UTCDateTime(2024, 5, 19, 14, 30, 10) # (YYYY, m, d, H, M, S) **** Enter data****
 
 # set the station name and download the response information
 stn1 = 'R21C0'      # station name
@@ -28,17 +28,17 @@ nw1 = 'AM'          # network name
 ch1 = ['HDF', 'DEF', 'Pa.', 'Pressure']
 if stn1 == 'R5968' or stn1 == 'R4FA0':    # read inventory files if online inventory not available
     f = open(stn1+'.xml')
-    inv = read_inventory(stn1+'.xml')
+    inv1 = read_inventory(stn1+'.xml')
     f.close()
 else:
     inv1 = rs.get_stations(network=nw1, station=stn1, level='RESP')  # get the instrument response
-notes1 = 'R21C0, Wind 2.5 kph, Gust 3.6 kph, 238°'
+notes1 = 'R21C0 Noise'
 
 # Channel 2 data
-startTime2 = UTCDateTime(2024, 5, 16, 2, 52, 30) # (YYYY, m, d, H, M, S) **** Enter data****
+startTime2 = UTCDateTime(2024, 5, 19, 14, 30, 10) # (YYYY, m, d, H, M, S) **** Enter data****
 
 # set the station name and download the response information
-stn2 = 'R21C0'      # station name
+stn2 = 'R5968'      # station name
 nw2 = 'AM'          # network name
 #ch2 = ['*HZ', 'DISP', 'm.', 'Displacement']
 #ch2 = ['*HZ', 'VEL', 'm/s.', 'Velocity']
@@ -46,11 +46,11 @@ nw2 = 'AM'          # network name
 ch2 = ['HDF', 'DEF', 'Pa.', 'Pressure']
 if stn2 == 'R5968' or stn2 == 'R4FA0':    # read inventory files if online inventory not available
     f = open(stn2+'.xml')
-    inv = read_inventory(stn2+'.xml')
+    inv2 = read_inventory(stn2+'.xml')
     f.close()
 else:
     inv2 = rs.get_stations(network=nw2, station=stn2, level='RESP')  # get the instrument response
-notes2 = 'R21C0, Wind 0, Gust 0'
+notes2 = 'R5968 Noise'
       
 #Setup the data plot
 duration = 300               # duration of plots in seconds **** Enter data****
@@ -68,7 +68,6 @@ filt = [0.04, 0.05, 49, 50]   # For Booms with 20s mechanical filter fitted
 #filt = [9.9, 10, 20, 20.1]
 #filt = [19.9, 20, 30, 30.1]
 #filt = [29.9, 30, 40, 40.1]
-#filt = [39.9, 40, 49, 50]
 #filt = [39.9, 40, 49, 50]
 #filt = [48.9, 49, 49, 50]
 
