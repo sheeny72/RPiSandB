@@ -442,3 +442,28 @@ Example output files for high resolution trace plots:
 M2.5Quake BHP Mt Arthur Coal Mine, Muswellbrook, NSW, Australiaunknown20240502*.*
 Example output for section plot and map:
 M2.5Quake Moolarben *.*
+
+# RSnB Plinth.pdf
+This is a drawing for a proposed plinth for my Raspberry Shake and Boom (RSnB), but it will probably also house my Raspberry Shake 3D. Installation is waiting on establishing reliable network to the shed.
+
+It uses the tapered ends of a 200L HDPE drum to form the plinth and make the cover for the Shakes.
+
+A 4 port infrasound manifold is cast into the plinth using 20mm PVC pipe, a 20mm PVC pipe 5 way joint, and a 20mm PVC to 1/2" BSP elbow. Building the manifold into the plinth keeps it low to the ground to minimise the effects of wind noise, and it also allows the minimum length of 4mm plastic tubing for connection to the RSnB to minimise attenuation.
+
+The plinth will be located close to but not touching the shed so that ethernet and the power cables for the Shakes can pass through the 25mm PVC conduit. The conduit will be flexibly sealed to the shed wall cladding to minimise transmission of any noise/vibration from the shed.
+
+The cover will be attached by 4 M8 bolts and nutserts rivetted into the plinth form. The nutserts will be taped off from the inside to stop concrete entering the threads.
+
+Builders plastic will be used to line the excavation (which is only shown roughly) to prevent rising ground moisture.
+
+If in future, a surrounding concrete slab is to be poured, 10 or 12mm expansion form is to be used to ensure isolation from the slab. (This has worked excellently in previous observatory pier plinth/floor designs).
+
+The cover will be trimmed to suit the infrasound manifold and conduit.
+
+The planned location is of the souther side (southern hemisphere!) of the shed so it should be shaded most of the time.
+
+In the event that high temperatures, or high humidity becomes an issue, 2mm ventialtion holes will ve drilled in the cover around the perispher just above the top of the plinth for ventilation. These holes will be angled up for outside to inside to prevent water ingress.
+
+Open cell foam plugs can be cut to fit the ends of the infrasound manifold pipes to prevent wasps and other insects nesting inside, but the design is conducing to rodding of the manifold if necessary to remove and such blockages.
+
+Being a plinth design, ground water and flooding issues associated with pit type vaults should be eliminated. The size and depth of the plinth excavation should allow good seismic transmission.
