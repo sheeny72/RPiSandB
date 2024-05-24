@@ -467,3 +467,44 @@ In the event that high temperatures, or high humidity becomes an issue, 2mm vent
 Open cell foam plugs can be cut to fit the ends of the infrasound manifold pipes to prevent wasps and other insects nesting inside, but the design is conducing to rodding of the manifold if necessary to remove and such blockages.
 
 Being a plinth design, ground water and flooding issues associated with pit type vaults should be eliminated. The size and depth of the plinth excavation should allow good seismic transmission.
+
+# Q3DSEReport3.py
+This code can be run on any RS3D Raspberry Shake on the Raspberry Shake Network.
+It reads all three channels (EHZ, EHE and EHN).
+It is an update of Q3DSEReport.py
+
+There is latent code included for use of local inventory files (just need to uncomment these lines if required).
+
+Output includes:
+Filtered velocity traces for EHZ, EHE and EHN channels,
+Specific Energy Traces showing total Specific Energy and components from each of the 3 channels,
+Unfiltered spectrogram of all channels,
+Power Spectral Density plots for all three channels;
+Fast Fourier Transform plot of all three channels,
+Background Noise levels on all three channels,
+a table of Phase arrival times,
+Spherical Ray Path plot,
+Nearside Perspective map of the event and station,
+Particle Motion Plots,
+Event details,
+Quake Energy including TNT equivalent,
+Phase key,
+Notes.
+
+The background noise limits and Specific Energy plot were developed to assist identification of weak arrivals.
+
+Copy and save the files "RS logo.png" to the same location as Q3DSEReport3.
+
+Most plot information is entered in lines 83 to 126.
+Bandpass Filter corners are specified in lines 136 to 148.
+
+The program demonstrates:
+Reading station traces,
+Removing instrument response,
+Trace manipulation/calculations,
+Secondary axes,
+Plotting arrivals,
+Figure and Axes Text.
+
+Example output files:
+M5.6Quake Southwest Indian Ridge*.png
