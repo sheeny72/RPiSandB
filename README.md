@@ -507,4 +507,4 @@ Plotting arrivals,
 Figure and Axes Text.
 
 Example output files:
-M5.6Quake Southwest Indian Ridge*.png
+M6.3Quake Vanuatu Islands*.png
