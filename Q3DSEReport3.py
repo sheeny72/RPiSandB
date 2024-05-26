@@ -80,13 +80,13 @@ def divTrace(tr, n):            # divide trace into n equal parts for background
     return tr.__div__(n)
 
 #enter event data
-eventTime = UTCDateTime(2024, 5, 23, 11, 27, 2) # (YYYY, m, d, H, M, S) **** Enter data****
-latE = -37.2                                    # quake latitude + N -S **** Enter data****
-lonE = 47.7                                    # quake longitude + E - W **** Enter data****
-depth = 10                             # quake depth, km **** Enter data****
-mag = 5.6                             # quake magnitude **** Enter data****
-eventID = 'rs2024kdjpxq'               # ID for the event **** Enter data****
-locE = "Southwest Indian Ridge"      # location name **** Enter data****
+eventTime = UTCDateTime(2024, 5, 25, 22, 23, 16) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -17.1                                    # quake latitude + N -S **** Enter data****
+lonE = 167.9                                    # quake longitude + E - W **** Enter data****
+depth = 29                             # quake depth, km **** Enter data****
+mag = 6.3                             # quake magnitude **** Enter data****
+eventID = 'rs2024khwvdp'               # ID for the event **** Enter data****
+locE = "Vanuatu Islands"      # location name **** Enter data****
 
 # set the station name and download the response information
 stn = 'R4FA0'      # your station name
@@ -484,7 +484,7 @@ secax_x12.set_xlabel('P e r i o d ,   s', size='small', alpha=0.5, labelpad=0)
 #plot background noise limits
 plot_noiselims(ax1, bnZstd, -bnZstd)      # EHZ noise limits - comment out if not desired
 plot_noiselims(ax3, bnEstd, -bnEstd)      # EHN noise limits - comment out if not desired
-plot_noiselims(ax3, bnNstd, -bnNstd)      # EHE noise limits - comment out if not desired
+plot_noiselims(ax5, bnNstd, -bnNstd)      # EHE noise limits - comment out if not desired
 plot_se_noiselims(ax7, bnsestd)           # specific kinetic energy noise limits - comment out if not desired
 
 # plot Signal envelopes
