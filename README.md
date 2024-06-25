@@ -515,15 +515,16 @@ It reads the HDF channel.
 It's intended use is for direct comparison with noise pollution compliance requirements which may be expressed in units of dB(G).
 
 Output includes:
-Filtered waveform (in Pa)
-Normalised linear FFT spectrum in Pa
-G weighted FFT spectrum in Pa
-Normailised linear FFT spectrum in dBL
-G weighted FFT spectrum (db(G))
-Time domain plots of Infrasound Pressure Level in dBL and estimated dB(G)
-Peak Infrasound Pressure in Pa
-Peak Infrasound Pressure Level in dbL
-Estimated Peak Infrasound Pressure Level in dB(G)
+Filtered waveform (in Pa);
+Normalised linear FFT spectrum in Pa;
+G weighted FFT spectrum in Pa;
+Normailised linear FFT spectrum in dBL;
+G weighted FFT spectrum (db(G));
+Time domain plots of Infrasound Pressure Level in dBL and estimated dB(G);
+Peak Infrasound Pressure in Pa;
+Peak Infrasound Pressure Level in dbL;
+Estimated Peak Infrasound Pressure Level in dB(G);
+Notes.
 
 Note: the Infrasound pressure level in dB(G) is "estimated" as the calculation method assumes the frequency distribution
 across the sample does not change, so it is not as accurate as hardware weighting filters between the microphone and a SPL meter.
