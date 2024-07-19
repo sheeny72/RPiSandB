@@ -533,3 +533,754 @@ Empirical formulae were used to approximate the G weighting curve with R>=0.9999
 
 Example output files:
 IR-R21C0Quarry*.png
+
+# BoomGWeighting3.py
+This code can be run on any Raspberry Boom or Raspberry Shake and Boom on the Raspberry Shake Network.
+It uses module RBoomGWeighting.py and demonstrates a typical workflow for using the RBoomGWeighting.py module.
+It reads the HDF channel.
+It's intended use is for direct comparison with noise pollution compliance requirements which may be expressed in units of dB(G).
+
+Output includes:
+Filtered waveform (in Pa);
+Normalised linear FFT spectrum in Pa;
+G weighted FFT spectrum in Pa;
+Normailised linear FFT spectrum in dBL;
+G weighted FFT spectrum (db(G));
+Time domain plots of Infrasound Pressure Level in dBL and estimated dB(G);
+Peak Linear Infrasound Pressure in Pa;
+Peak G weighted Infrasound Pressure in Pa;
+Peak Linear Infrasound Pressure Level in dbL;
+Estimated Peak Infrasound Pressure Level in dB(G);
+Octave or 1/3 Octave analysis including peak, peak to peak, average and RMS amplitude, as well as waveforms;
+Notes.
+
+Note: 1/3 Octave or Octave analysis is used to apply G weighting and reconstruct and estimated G weighted waveform.
+
+Empirical formulae were used to approximate the G weighting curve with R>=0.9999.
+
+Example output files:
+IR-R21C0Quarry*.png
+
+#########################################################################################
+# RBoomGWeighting.py
+
+This is a module used by BoomGWeighting3.py.
+
+Functions include:
+
+def fftL(y, fl, fu):
+    """
+    fftL produces a linear FFT from a filtered signal waveform.
+    Wave form units are Pascals (Pa) and output fft units are also Pascals(Pa)
+    i.e. FFT units same as waveform
+    
+    Parameters
+    ----------
+    y : stream 
+        Obspy waveform stream with response removed. Pa
+    fl : float
+        Bandpass lower frequency used to filter y. Hz
+    fu : float
+        Bandpass upper frequency used to filter y. Hz
+
+    Returns
+    -------
+    f_plot : array of float64
+        np.array of frequencies for the fft plot. Hz
+    lfft : array of float64
+        FFT values for f_plot. Pa
+
+    """
+
+def peak(y):
+    """
+    Calculate maximum pressure amplitude
+    
+    Parameters
+    ----------
+    y : trace 
+        Obspy waveform stream with response removed. Pa
+
+    Returns
+    -------
+    maxp : float64
+        maximum waveform amplitude. Pa
+    
+    """
+
+def peak_peak(y):
+    """
+    Calculate maximum peak to peak pressure amplitude
+    
+    Parameters
+    ----------
+    y : trace 
+        Obspy waveform stream with response removed. Pa
+
+    Returns
+    -------
+    maxpp : float64
+        maximum waveform peak to peak amplitude. Pa
+    
+    """
+
+def average(y):
+    """
+    Calculate average pressure amplitude
+    
+    Parameters
+    ----------
+    y : trace 
+        Obspy waveform trace with response removed. Pa
+
+    Returns
+    -------
+    yav : float64
+        waveform average amplitude for the sample. Pa
+    
+    """
+
+def rms(y):
+    """
+    Calculate RMS pressure amplitude
+    
+    Parameters
+    ----------
+    y : trace 
+        Obspy waveform trace with response removed. Pa
+
+    Returns
+    -------
+    yrms : float64
+        waveform root mean square (RMS) amplitude for the sample. Pa
+    
+    """
+
+def pa2db(y):    
+    """
+    Convert Pascals (Pa) to linear (unweighted) decibels (dBL)
+    
+    Parameters
+    ----------
+    y : stream 
+        Obspy waveform stream with response removed. Pa
+
+    Returns
+    -------
+    db : stream
+        Obspy wave form stream. dBL
+    
+    """
+
+def db2pa(db):    
+    """
+    Convert decibels (dB) to Pascals (Pa)
+    
+    Parameters
+    ----------
+    db : array of float 
+        array of decibel (dB) values
+
+    Returns
+    -------
+    x : stream
+        Obspy wave form stream. dBL
+    
+    """
+
+def peakSPL(y):
+    """
+    Calculate the peak sound pressure level (SPL). dBL
+    
+    Parameters
+    ----------
+    y : stream 
+        Obspy waveform stream with response removed. Pa
+
+    Returns
+    -------
+    pspl : float64
+        Peak sound pressure level (SPL). dBL
+    
+    """
+
+def fft2dBL(lfft):
+    """
+    Convert FFT in Pa to dBL
+    
+    Parameters
+    ----------
+    lfft : array of float64
+        Linear FFT values. Pa
+
+    Returns
+    -------
+    fftdB : list
+        FFT values in sound pressure level (SPL). dBL
+    
+    """
+
+def dBL2dBG(f_plot, fftdB):
+    """
+    Convert dBL to dB(G)
+    Empirical formulae curve fitted to G weighting curve with R>=0.9999
+    
+    Parameters
+    ----------
+    f_plot : array of float64
+        np.array of frequencies for the fft plot. Hz
+    fftdB : list
+        FFT values in sound pressure level (SPL). dBL
+
+    Returns
+    -------
+    fftdBG : list
+        G weighted FFT values in sound pressure level (SPL). dB(G)
+    
+    """
+
+def dBG2PaG(f_plot, fftdB, fftdBG, fl, fu):
+    """
+    Convert G weighted SPL FFT in dB(G) back to G weighted FFT in Pa
+    
+    Parameters
+    ----------
+    f_plot : array of float64
+        np.array of frequencies for the fft plot. Hz
+    fftdB : list
+        Linear FFT values in sound pressure level (SPL). dBL
+    fftdBG : list
+        G weighted FFT values in sound pressure level (SPL). dB(G)
+
+    Returns
+    -------
+    fftG : list
+        G weighted FFT values in Pascals. Pa
+    l2G : float64
+        Average difference between G weighted and linear sound pressure levels.
+        i.e. to be ADDED to dbL to get db(G)
+    
+    """
+
+def octave():
+    """
+    Generate an array of standard octave band centre frequencies
+    
+    Parameters
+    ----------
+    nil.
+    
+    Returns
+    -------
+    oct : 2D array of float
+        oct[n][0] : octave band number
+        oct[n][1] : octave band nominal frequency, Hz
+        oct[n][2] : octave band centre frequency, Hz
+ 
+    Use the band number to correlate with reports using this notation
+    Use the nominal frequency for labelling octaves
+    use the centre frequency for calculating octave upper and lower frequencies
+    
+    'Octave' : text bendwidth identifier
+    
+    """
+
+def octFL(fc):
+    """
+    Calculate lower octave band frequency
+    
+    Parameters
+    ----------
+    fc : float
+        Calculated octave band centre frequency. Hz
+
+    Returns
+    -------
+    fl : float
+        Octave band lower frequency. Hz
+    
+    """
+
+def octFU(fc):
+    """
+    Calculate upper octave band frequency
+    
+    Parameters
+    ----------
+    fc : float
+        Calculated octave band centre frequency. Hz
+
+    Returns
+    -------
+    fu : float
+        Octave band upper frequency. Hz
+    
+    """
+
+def octBandLow(fl, fu):
+    """
+    Find the lowest octave band fully within the filter frequency range
+    
+    Parameters
+    ----------
+    fl : float
+        Bandpass lower frequency. Hz
+    fu : float
+        Bandpass upper frequency. Hz
+
+    Returns
+    -------
+    octBL[i] : array of float
+        octBL[i][0] : Octave Band Number.
+        octBL[i][1] : Octave band nominal frequency. Hz
+        octBL[i][2] : Octave Band centre frequency. Hz
+    i : index in octave array
+    
+    """
+
+def octBandHigh(fl, fu):
+    """
+    Find the highest octave band fully within the filter frequency range
+    
+    Parameters
+    ----------
+    fl : float
+        Bandpass lower frequency. Hz
+    fu : float
+        Bandpass upper frequency. Hz
+
+    Returns
+    -------
+    octBH[i] : array of float
+        octBH[i][0] : Octave Band Number.
+        octBH[i][1] : Octave band nominal frequency. Hz
+        octBH[i][2] : Octave Band centre frequency. Hz
+     i : index in octave array
+   
+    """
+
+def octBandLow1(fl, fu):
+    """
+    Find the lowest octave band which spans the lower frequency of the filter frequency range
+    
+    Parameters
+    ----------
+    fl : float
+        Bandpass lower frequency. Hz
+    fu : float
+        Bandpass upper frequency. Hz
+
+    Returns
+    -------
+    octBL[i] : array of float
+        octBL[i][0] : Octave Band Number.
+        octBL[i][1] : Octave band nominal frequency. Hz
+        octBL[i][2] : Octave Band centre frequency. Hz
+    i : index in octave array
+    
+    """
+
+def octBandHigh1(fl, fu):
+    """
+    Find the highest octave band which spans the upper frequency of the filter frequency range
+    
+    Parameters
+    ----------
+    fl : float
+        Bandpass lower frequency. Hz
+    fu : float
+        Bandpass upper frequency. Hz
+
+    Returns
+    -------
+    octBH[i] : array of float
+        octBH[i][0] : Octave Band Number.
+        octBH[i][1] : Octave band nominal frequency. Hz
+        octBH[i][2] : Octave Band centre frequency. Hz
+    i : index in octave array
+    
+    """
+
+def octBands(fl, fu, within):
+    """
+    Calculate an array of octave band frequencies
+    
+    Parameters
+    ----------
+    fl : float
+        Bandpass lower frequency. Hz
+    fu : float
+        Bandpass upper frequency. Hz
+    within : boolean
+        True of bands wholly contained inside bandpass filter frequencies
+        False if bands span the bandpass filter frequencies
+
+    Returns
+    -------
+    octB[i][j] : array of float
+        octB[i][0] : Octave Band Number.
+        octB[i][1] : Octave band nominal frequency. Hz
+        octB[i][2] : Octave Band centre frequency. Hz
+        octB[i][3] : Octave Band lower frequency. Hz
+        octB[i][4] : Octave Band upper frequency. Hz
+
+    """
+
+def octave13():
+    """
+    Generate an array of standard 1/3 octave band frequencies
+    
+    Parameters
+    ----------
+    nil.
+    
+    Returns
+    -------
+    oct13 : 2D array of float
+        oct13[n][0] : 1/3 octave band number
+        oct13[n][1] : 1/3 octave band nominal frequency, Hz
+        oct13[n][2] : 1/3 octave band centre frequency, Hz
+    
+    oct13t : text band width identifier
+    
+    """
+
+def oct13FL(fc):
+    """
+    Calculate lower 1/3 octave band frequency
+    
+    Parameters
+    ----------
+    fc : float
+        Calculated 1/3 octave band centre frequency. Hz
+
+    Returns
+    -------
+    fl : float
+        1/3 Octave band lower frequency. Hz
+    
+    """
+
+def oct13FU(fc):
+    """
+    Calculate upper 1/3 octave band frequency
+    
+    Parameters
+    ----------
+    fc : float
+        Calculated 1/3 octave band centre frequency. Hz
+
+    Returns
+    -------
+    fu : float
+        1/3 Octave band upper frequency. Hz
+    
+    """
+
+def oct13BandLow(fl, fu):
+    """
+    Find the lowest 1/3 octave band fully within the filter frequency range
+    
+    Parameters
+    ----------
+    fl : float
+        Bandpass lower frequency. Hz
+    fu : float
+        Bandpass upper frequency. Hz
+
+    Returns
+    -------
+    oct13BL[i] : array of float
+        oct13BL[i][0] : 1/3 Octave Band Number.
+        oct13BL[i][1] : 1/3 Octave band nominal frequency. Hz
+        oct13BL[i][2] : 1/3 Octave Band centre frequency. Hz
+    i : index in octave array
+    
+    """
+
+def oct13BandHigh(fl, fu):
+    """
+    Find the highest octave band fully within the filter frequency range
+    
+    Parameters
+    ----------
+    fl : float
+        Bandpass lower frequency. Hz
+    fu : float
+        Bandpass upper frequency. Hz
+
+    Returns
+    -------
+    oct13BH[i] : array of float
+        oct13BH[i][0] : Octave Band Number.
+        oct13BH[i][1] : Octave band nominal frequency. Hz
+        oct13BH[i][2] : Octave Band centre frequency. Hz
+    i : index in octave array
+    
+    """
+
+def oct13BandLow1(fl, fu):
+    """
+    Find the lowest 1/3 octave band which spans the lower frequency of the filter frequency range
+    
+    Parameters
+    ----------
+    fl : float
+        Bandpass lower frequency. Hz
+    fu : float
+        Bandpass upper frequency. Hz
+
+    Returns
+    -------
+    oct13BL[i] : array of float
+        oct13BL[i][0] : 1/3 Octave Band Number.
+        oct13BL[i][1] : 1/3 Octave band nominal frequency. Hz
+        oct13BL[i][2] : 1/3 Octave Band centre frequency. Hz
+    i : index in octave array
+    
+    """
+
+def oct13BandHigh1(fl, fu):
+    """
+    Find the highest octave band which spans the upper frequency of the filter frequency range
+    
+    Parameters
+    ----------
+    fl : float
+        Bandpass lower frequency. Hz
+    fu : float
+        Bandpass upper frequency. Hz
+
+    Returns
+    -------
+    oct13BH[i] : array of float
+        oct13BH[i][0] : 1/3 Octave Band Number.
+        oct13BH[i][1] : 1/3 Octave band nominal frequency. Hz
+        oct13BH[i][2] : 1/3 Octave Band centre frequency. Hz
+    i : index in octave array
+    
+    """
+
+def oct13Bands(fl, fu, within):
+    """
+    Calculate an array of 1/3 octave band frequencies
+    
+    Parameters
+    ----------
+    fl : float
+        Bandpass lower frequency. Hz
+    fu : float
+        Bandpass upper frequency. Hz
+    within : boolean
+        True of bands wholly contained inside bandpass filter frequencies
+        False if bands span the bandpass filter frequencies
+
+    Returns
+    -------
+    oct13B[i][j] : array of float
+        oct13B[i][0] : Octave Band Number.
+        oct13B[i][1] : Octave band nominal frequency. Hz
+        oct13B[i][2] : Octave Band centre frequency. Hz
+        oct13B[i][3] : Octave Band lower frequency. Hz
+        oct13B[i][4] : Octave Band upper frequency. Hz
+
+    """
+
+def sum_waveforms(a, b):
+    
+    """
+    Add waveform data points from 2 waveforms of the same length
+
+    Parameters
+    ----------
+    a : stream 
+        Obspy waveform stream with response removed. Pa
+        
+    b : stream 
+        Obspy waveform stream with response removed. Pa
+
+    Returns
+    -------
+    c : stream 
+        Obspy waveform stream with response removed. Pa
+    """
+
+def sum_stream(st):
+    """
+    Sum the band analysed / processed waveforms back to a single stream/trace
+
+    Parameters
+    ----------
+    st : stream 
+        Obspy waveform stream with response removed. Pa
+        
+    Returns
+    -------
+    c : trace 
+        Obspy waveform trace with response removed. Pa
+    """
+
+def plotBands (a, ax):
+    """
+    Plot bands on selected axes
+    
+    Parameters
+    ----------
+    a[i][j] : array of float
+        a[i][0] : Octave Band Number.
+        a[i][1] : Octave band nominal frequency. Hz
+        a[i][2] : Octave Band centre frequency. Hz
+        a[i][3] : Octave Band lower frequency. Hz
+        a[i][4] : Octave Band upper frequency. Hz
+        
+    ax : Matlotlib pyplot axes
+        Target axes for band plots
+
+    Returns
+    -------
+    nil
+
+    """
+
+def update_trace_stats(z):
+    """
+    Add or update stats to a trace
+    
+    Parameters
+    ----------
+    z : trace 
+        Obspy waveform trace in Infrasound Pressure. Pa
+        
+
+    Returns
+    -------
+    z : trace 
+        Obspy waveform trace in Infrasound Pressure. Pa
+        
+        Stats added or updated to trace:
+            z.stats.max = maximum amplitude as float
+            z.stats.mean = mean (or average) amplitude as float
+            z.stats.rms = root mean squared (RMS) amplitude as float
+
+    """
+
+def band_waveforms(a, bands):
+    """
+    Build a stream of waveforms filtered by bands
+    
+    Parameters
+    ----------
+    a : stream 
+        Obspy waveform stream in Infrasound Pressure. Pa
+        
+    bands[i][j] : array of float
+        bands[i][0] : Octave Band Number.
+        bands[i][1] : Octave band nominal frequency. Hz
+        bands[i][2] : Octave Band centre frequency. Hz
+        bands[i][3] : Octave Band lower frequency. Hz
+        bands[i][4] : Octave Band upper frequency. Hz
+
+    Returns
+    -------
+    st : stream 
+        Obspy waveform stream in Infrasound Pressure. Pa
+        One trace per filter band.
+        
+        Stats added to each trace:
+            st[i].stats.filter = bandpass filter range as string
+            st[i].stats.max = maximum amplitude as float
+            st[i].stats.mean = mean (or average) amplitude as float
+            st[i].stats.rms = root mean squared (RMS) amplitude as float
+
+    """
+
+def band_stream_plot(a, title1, title2, save, file):
+    """
+    Plot a stream of waveforms filtered by bands
+    
+    Parameters
+    ----------
+    a : stream 
+        Obspy waveform stream in Infrasound Pressure. Pa
+        
+    title : Title text for the plot
+    
+    save : boolean
+        save = True to automatically name and save the plot
+        save = False to display only without saving
+        
+    file : text
+        file = filename including path for saving. title and .png will be added!
+    
+    Returns
+    -------
+    nil
+    
+    """
+
+def band_G_factors(f, fftL, fftG, bands):
+    """
+    Build an an array of G weighting factors for each band
+    
+    Parameters
+    ----------
+    f : array of float64
+        np.array of frequencies for the fft plot. Hz
+    fftL : list
+        Linear FFT values in infrasound pressure (Pa)
+    fftG : list
+        G weighted FFT values in infrasound pressure (Pa)
+        
+    bands[i][j] : array of float
+        bands[i][0] : Octave Band Number.
+        bands[i][1] : Octave band nominal frequency. Hz
+        bands[i][2] : Octave Band centre frequency. Hz
+        bands[i][3] : Octave Band lower frequency. Hz
+        bands[i][4] : Octave Band upper frequency. Hz
+
+    Returns
+    -------
+    bandGs : array of float64
+        np.array of max G weight and linear amplitude per band
+        
+        bandGs[i][0] : max Linear FFT amplitude
+        bandGs[i][1] : corresponding max G weighted FFT amplitude
+    """
+
+def band_G_waveforms(lwaves, bandGs):
+    """
+    Build a stream of G weighted waveforms filtered by bands
+    
+    Parameters
+    ----------
+    lwaves : stream 
+        Obspy linear waveform stream in Infrasound Pressure. Pa
+        One trace per filter band.
+        
+        Stats added to each trace:
+            st[i].stats.filter = bandpass filter range as string
+            st[i].stats.max = maximum amplitude as float
+            st[i].stats.mean = mean (or average) amplitude as float
+            st[i].stats.rms = root mean squared (RMS) amplitude as float
+        
+    bands[i][j] : array of float
+        bands[i][0] : Octave Band Number.
+        bands[i][1] : Octave band nominal frequency. Hz
+        bands[i][2] : Octave Band centre frequency. Hz
+        bands[i][3] : Octave Band lower frequency. Hz
+        bands[i][4] : Octave Band upper frequency. Hz
+
+    Returns
+    -------
+    gwaves : stream 
+        Obspy G weighted waveform stream in Infrasound Pressure. Pa
+        One trace per filter band.
+        
+        Stats updated in each trace:
+            st[i].stats.max = maximum amplitude as float
+            st[i].stats.mean = mean (or average) amplitude as float
+            st[i].stats.rms = root mean squared (RMS) amplitude as float
+
+    """
+
+
