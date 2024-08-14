@@ -551,6 +551,8 @@ Peak Linear Infrasound Pressure in Pa;
 Peak G weighted Infrasound Pressure in Pa;
 Peak Linear Infrasound Pressure Level in dbL;
 Estimated Peak Infrasound Pressure Level in dB(G);
+Leq in both linear and G weighted dB;
+SEL in both linear and G weighted dB;
 Octave or 1/3 Octave analysis including peak, peak to peak, average and RMS amplitude, as well as waveforms;
 Notes.
 
@@ -652,6 +654,38 @@ def rms(y):
     Returns
     -------
     yrms : float64
+        waveform root mean square (RMS) amplitude for the sample. Pa
+    
+    """
+
+def leq(dB):
+    """
+    Equivalent infrasound Pressure Level, Leq is the RMS value of the Infrasound pressure level
+    
+    Parameters
+    ----------
+    dB : array of float64 
+        array of float64 with response removed. dB
+
+    Returns
+    -------
+    yleq : float64
+        waveform root mean square (RMS) amplitude for the sample. Pa
+    
+    """
+
+    def sel(dB):
+    """
+    Infrasound Exposure Level, SEL
+    
+    Parameters
+    ----------
+    dB : trace 
+        Obspy waveform trace with response removed. dB
+
+    Returns
+    -------
+    ysel : float64
         waveform root mean square (RMS) amplitude for the sample. Pa
     
     """
