@@ -27,8 +27,6 @@ import numpy as np
 from obspy.signal import filter
 import matplotlib.pyplot as plt
 
-bandtext = ''
-
 def fftL(y, fl, fu):
     """
     fftL produces a linear FFT from a filtered signal waveform.
@@ -146,19 +144,59 @@ def rms(y):
     
     return yrms
 
+def leq(dB):
+    """
+    Equivalent infrasound Pressure Level, Leq is the RMS value of the Infrasound pressure level
+    
+    Parameters
+    ----------
+    dB : array of float64 
+        array of float64 with response removed. dB
+
+    Returns
+    -------
+    yleq : float64
+        waveform root mean square (RMS) amplitude for the sample. Pa
+    
+    """
+    # calculate y rms
+    yleq = np.mean(dB**2)
+    yleq = np.sqrt(yleq)
+        
+    return yleq
+
+def sel(dB):
+    """
+    Infrasound Exposure Level, SEL
+    
+    Parameters
+    ----------
+    dB : trace 
+        Obspy waveform trace with response removed. dB
+
+    Returns
+    -------
+    ysel : float64
+        waveform root mean square (RMS) amplitude for the sample. Pa
+    
+    """
+    ysel = leq(dB) + 10*np.log10(len(dB.data)/100)
+    
+    return ysel
+
 def pa2db(y):    
     """
     Convert Pascals (Pa) to linear (unweighted) decibels (dBL)
     
     Parameters
     ----------
-    y : stream 
-        Obspy waveform stream with response removed. Pa
+    y : array of float
+        Obspy waveform trace with response removed. Pa
 
     Returns
     -------
-    db : stream
-        Obspy wave form stream. dBL
+    db : trace
+        array of decibel (dB) values
     
     """
     db = 10*np.log10(y*y) + 93.979400087        #convert to sound pressure level
@@ -176,7 +214,7 @@ def db2pa(db):
 
     Returns
     -------
-    x : stream
+    x : array of float
         Obspy wave form stream. dBL
     
     """

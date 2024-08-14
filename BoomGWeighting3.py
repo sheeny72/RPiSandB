@@ -7,7 +7,7 @@ Created on Mon Jun 24 08:19:54 2024
 from obspy.clients.fdsn import Client
 from obspy import UTCDateTime
 from matplotlib.ticker import AutoMinorLocator
-import numpy as np
+#import numpy as np
 import matplotlib.pyplot as plt
 import RBoomGWeighting as gw
 
@@ -22,7 +22,7 @@ duration = 30               #duration of plot in seconds
 end = start + duration                # start plus plot duration in seconds (recommend a minimum of 10s)
 daylightSavings = False
 save_plot = True
-oct13 = False    # True for 1/3 Octave analysis, False for Octave analysis
+oct13 = True    # True for 1/3 Octave analysis, False for Octave analysis
 inside = False  # True to keep bands inside the filtered range, False to span the filtered range
 
 # Name the Event
@@ -41,11 +41,21 @@ inv = client.get_stations(network="AM", station=STATION, level="RESP")
 
 # set up bandpass filter
 flc = 0.5      #enter bandpass filter lower corner frequency
-fuc = 49        #enter bandpass filter upper corner frequency
+fuc = 20        #enter bandpass filter upper corner frequency
 filt = [flc-0.01, flc, fuc, fuc+0.1]   
 
 # remove instrument response now that raw trace has been processed
 y = st.remove_response(inventory=inv,pre_filt=filt,output="DEF", water_level=60)
+
+# calculate linear SPL
+
+yspl = gw.pa2db(y[0].data)
+
+#calculate linear Leq
+yleq = gw.leq(yspl)
+
+# calculate infrasound exposure level SEL
+ysel = gw.sel(yspl)
 
 # initialise arrays for FFTs
 f_plot = []
@@ -87,6 +97,16 @@ bwaves = gw.band_waveforms(y, bands)
 # test sum the band filtered waveforms to compare to original
 testwave = gw.sum_stream(bwaves)
 
+# calculate G weighted SPL
+
+tspl = gw.pa2db(testwave.data)
+
+#calculate G weighted Leq
+tleq = gw.leq(tspl)
+
+# calculate infrasound exposure level SEL
+tsel = gw.sel(tspl)
+
 # calculate band G factors
 bGf = gw.band_G_factors(f_plot, y_mag_plot, fftG, bands)
 
@@ -95,6 +115,17 @@ bGwaves = gw.band_G_waveforms(bwaves, bGf)
 
 #estimate G weighted waveform
 g_weighted_wave = gw.sum_stream(bGwaves)
+#print(g_weighted_wave)
+
+# calculate G weighted SPL
+
+gspl = gw.pa2db(g_weighted_wave.data)
+
+#calculate G weighted Leq
+gleq = gw.leq(gspl)
+
+# calculate infrasound exposure level SEL
+gsel = gw.sel(gspl)
 
 # calculate G weighted waveform parameters
 pGmax = gw.peak(g_weighted_wave)
@@ -112,10 +143,10 @@ ax4 = fig.add_subplot(4,1,4)    #right middle 2 high
 
 # plot the waveform
 ax1.plot(y[0].times(reftime=start), y[0].data, lw=1, color='b', label='linear Pa')
-ax1.plot(y[0].times(reftime=start), testwave.data, lw=1, color='g', alpha = 0.5, label='test')
+ax1.plot(y[0].times(reftime=start), testwave.data, lw=1, color='g', alpha = 0.5, label='recon lin Pa')
 ax1.plot(y[0].times(reftime=start), g_weighted_wave.data, lw=1, color='r', alpha=0.7, label='G weighted Pa')
 ax1.set_ylabel('Infrasound, Pa')
-ax1.legend()
+ax1.legend(frameon=False, fontsize='x-small')
 ax1.xaxis.set_minor_locator(AutoMinorLocator(10))
 ax1.yaxis.set_minor_locator(AutoMinorLocator(5))
 ax1.margins(x=0)
@@ -124,7 +155,7 @@ ax1.margins(x=0)
 ax2.plot(f_plot, y_mag_plot, lw=1, color = 'b', label='linear')
 ax2.plot(f_plot, fftG, lw=1, color = 'r', label='G weighted')
 ax2.set_ylabel('FFT, Pa')
-ax2.legend()
+ax2.legend(frameon=False, fontsize='x-small')
 ax2.xaxis.set_minor_locator(AutoMinorLocator(10))
 ax2.yaxis.set_minor_locator(AutoMinorLocator(5))
 ax2.set_xscale('log')
@@ -137,7 +168,7 @@ gw.plotBands(bands, ax2)
 ax3.plot(f_plot, ydB, lw=1, color = 'b', label='dBL', alpha=1)
 ax3.set_ylabel('FFT, dB')
 ax3.plot(f_plot, ydBG, lw=1, color='r', label='dB(G)', alpha=0.7)
-ax3.legend()
+ax3.legend(frameon=False, fontsize='x-small')
 ax3.xaxis.set_minor_locator(AutoMinorLocator(10))
 ax3.yaxis.set_minor_locator(AutoMinorLocator(5))
 ax3.set_xscale('log')
@@ -147,10 +178,15 @@ ax3.margins(x=0)
 gw.plotBands(bands, ax3)
 
 # plot the time domain dBL and estimated dB(G)
-ax4.plot(y[0].times(reftime=start), 20*np.log10(abs(y[0].data)/0.00002), lw=1, color='b', label='dbL')
-ax4.plot(y[0].times(reftime=start), 20*np.log10(abs(g_weighted_wave.data)/0.00002), lw=1, color='r', alpha=0.7, label='dbG')
+ax4.plot(y[0].times(reftime=start), yspl, lw=1, color='b', label='dbL')
+ax4.plot(y[0].times(reftime=start), tspl, lw=1, color='g', label='dbL')
+ax4.plot(y[0].times(reftime=start), gspl, lw=1, color='r', alpha=0.7, label='dbG')
+ax4.axhline(tleq, lw=1, color='g', linestyle='--', label = 'linear Leq')
+ax4.axhline(tsel, lw=1, color='g', linestyle='-.', label = 'linear SEL')
+ax4.axhline(gleq, lw=1, color='k', linestyle='--', label = 'G weighted Leq')
+ax4.axhline(gsel, lw=1, color='k', linestyle='-.', label = 'G weighted SEL')
 ax4.set_ylabel('Infrasound, dBL')
-ax4.legend()
+ax4.legend(frameon=False, fontsize='x-small')
 ax4.xaxis.set_minor_locator(AutoMinorLocator(10))
 ax4.yaxis.set_minor_locator(AutoMinorLocator(5))
 ax4.margins(x=0)
@@ -187,6 +223,10 @@ fig.text(0.14, 0.72, 'RMS Pressure = '+str(round(prms,3))+'Pa. ('+str(filt[1])+"
 fig.text(0.14, 0.735, 'G weighted RMS Pressure = '+str(round(pGrms,3))+'Pa. ('+str(filt[1])+" to "+str(filt[2])+"Hz)", ha='left', color='r', alpha=0.7)    #report the G weighted RMS Pressure
 fig.text(0.88, 0.14, 'Peak Infrasound Pressure Level ='+str(round(splmax,1))+' dBL. ('+str(filt[1])+" to "+str(filt[2])+"Hz)", ha='right', alpha=0.7)   #report peak sound pressure level
 fig.text(0.88, 0.155, 'Estimated Peak Infrasound Pressure Level ='+str(round(splGmax,1))+' dB(G). ('+str(filt[1])+" to "+str(filt[2])+"Hz)", ha='right', alpha=0.7)   #report peak sound pressure level
+fig.text(0.14, 0.14, 'Leq = '+str(round(tleq,1))+' dB.', alpha=0.7, color='g')
+fig.text(0.14, 0.155, 'Leq = '+str(round(gleq,1))+' dB(G).', alpha=0.7, color='r')
+fig.text(0.22, 0.14, 'SEL = '+str(round(tsel,1))+' dB.', alpha=0.7, color='g')
+fig.text(0.22, 0.155, 'SEL = '+str(round(gsel,1))+' dB(G).', alpha=0.7, color='r')
 fig.text(0.9, 0.945, 'Raspberry Shake and Boom', size='small', ha='right', color='r')
 fig.text(0.9, 0.935, '@AlanSheehan18', size='small', ha='right')
 fig.text(0.9, 0.925, '@raspishake', size='small', ha='right')
