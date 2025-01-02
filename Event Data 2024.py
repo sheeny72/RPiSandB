@@ -1335,3 +1335,443 @@ depth = 29                             # quake depth, km **** Enter data****
 mag = 7.0                             # quake magnitude **** Enter data****
 eventID = 'rs2024qfvkxs'               # ID for the event **** Enter data****
 locE = "Off East Coast of Kamchatka"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 8, 22, 2, 23, 16) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -32.32                                    # quake latitude + N -S **** Enter data****
+lonE = 149.82                                     # quake longitude + E - W **** Enter data****
+depth = 0                             # quake depth, km **** Enter data****
+mag = 2.6                             # quake magnitude **** Enter data****
+eventID = 'unknown'               # ID for the event **** Enter data****
+locE = "Moolarben Coal Mine, Ulan, NSW, Australia"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 8, 23, 2, 2, 0) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -32.4                                    # quake latitude + N -S **** Enter data****
+lonE = 150.7                                     # quake longitude + E - W **** Enter data****
+depth = 10                             # quake depth, km **** Enter data****
+mag = 5.0                             # quake magnitude **** Enter data****
+eventID = 'rs2024qpnryv'               # ID for the event **** Enter data****
+locE = "Denman, NSW, Australia"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 8, 23, 15, 10, 20) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -32.4                                    # quake latitude + N -S **** Enter data****
+lonE = 150.9                                     # quake longitude + E - W **** Enter data****
+depth = 5                             # quake depth, km **** Enter data****
+mag = 3.2                             # quake magnitude **** Enter data****
+eventID = 'rs2024qqnvhn'               # ID for the event **** Enter data****
+locE = "Howick, NSW, Australia"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 8, 24, 6, 31, 38) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -32.3                                    # quake latitude + N -S **** Enter data****
+lonE = 150.7                                     # quake longitude + E - W **** Enter data****
+depth = 10                             # quake depth, km **** Enter data****
+mag = 4.4                             # quake magnitude **** Enter data****
+eventID = 'rs2024qrsjew'               # ID for the event **** Enter data****
+locE = "Wybong, NSW, Australia"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 8, 25, 23, 29, 8) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -19.8                                    # quake latitude + N -S **** Enter data****
+lonE = -175.0                                     # quake longitude + E - W **** Enter data****
+depth = 107                             # quake depth, km **** Enter data****
+mag = 6.9                             # quake magnitude **** Enter data****
+eventID = 'rs2024quvuvk'               # ID for the event **** Enter data****
+locE = "Tonga Islands"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 8, 26, 11, 15, 0) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -32.3                                    # quake latitude + N -S **** Enter data****
+lonE = 150.9                                     # quake longitude + E - W **** Enter data****
+depth = 10                             # quake depth, km **** Enter data****
+mag = 3.0                             # quake magnitude **** Enter data****
+eventID = 'rs2024qvtfdv'               # ID for the event **** Enter data****
+locE = "Muswellbrook, NSW, Australia"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 8, 26, 16, 26, 56) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -32.4                                    # quake latitude + N -S **** Enter data****
+lonE = 150.8                                     # quake longitude + E - W **** Enter data****
+depth = 10                             # quake depth, km **** Enter data****
+mag = 2.7                             # quake magnitude **** Enter data****
+eventID = 'rs2024qwdnye'               # ID for the event **** Enter data****
+locE = "Jerrys Plains, NSW, Australia"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 8, 27, 2, 31, 24) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -33.743                                    # quake latitude + N -S **** Enter data****
+lonE = 149.847                                     # quake longitude + E - W **** Enter data****
+depth = 0                             # quake depth, km **** Enter data****
+mag = 0.0                             # quake magnitude **** Enter data****
+eventID = 'unknown'               # ID for the event **** Enter data****
+locE = "Oberon Quarries, Oberon, NSW, Australia"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 9, 1, 20, 13, 34) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -6.8                                    # quake latitude + N -S **** Enter data****
+lonE = 155.5                                     # quake longitude + E - W **** Enter data****
+depth = 41                             # quake depth, km **** Enter data****
+mag = 6.4                             # quake magnitude **** Enter data****
+eventID = 'rs2024rhlkmi'               # ID for the event **** Enter data****
+locE = "Solomon Islands"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 9, 5, 3, 5, 19) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -32.30                                    # quake latitude + N -S **** Enter data****
+lonE = 149.80                                     # quake longitude + E - W **** Enter data****
+depth = 0                             # quake depth, km **** Enter data****
+mag = 2.5                             # quake magnitude **** Enter data****
+eventID = 'unknown'               # ID for the event **** Enter data****
+locE = "Moolarben Coal Mine, Ulan , NSW, Australia"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 9, 6, 19, 58, 33) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -32.3                                    # quake latitude + N -S **** Enter data****
+lonE = 150.7                                     # quake longitude + E - W **** Enter data****
+depth = 8                             # quake depth, km **** Enter data****
+mag = 4.5                             # quake magnitude **** Enter data****
+eventID = 'rs2024rqpnzd'               # ID for the event **** Enter data****
+locE = "Wybong , NSW, Australia"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 9, 11, 16, 46, 4) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -3.3                                    # quake latitude + N -S **** Enter data****
+lonE = 146.4                                     # quake longitude + E - W **** Enter data****
+depth = 10                             # quake depth, km **** Enter data****
+mag = 6.3                             # quake magnitude **** Enter data****
+eventID = 'rs2024rznunr'               # ID for the event **** Enter data****
+locE = "Bismarck Sea"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 9, 15, 22, 22, 48) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = 51.6                                    # quake latitude + N -S **** Enter data****
+lonE = -130.6                                     # quake longitude + E - W **** Enter data****
+depth = 10                             # quake depth, km **** Enter data****
+mag = 6.5                             # quake magnitude **** Enter data****
+eventID = 'rs2024shhwgj'               # ID for the event **** Enter data****
+locE = "Haida Gwaii Region"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 9, 16, 11, 36, 34) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = 17.2                                    # quake latitude + N -S **** Enter data****
+lonE = 147.2                                     # quake longitude + E - W **** Enter data****
+depth = 31                             # quake depth, km **** Enter data****
+mag = 6.3                             # quake magnitude **** Enter data****
+eventID = 'rs2024siiedy'               # ID for the event **** Enter data****
+locE = "Mariana Islands Region"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 9, 20, 12, 19, 35) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -34.8                                    # quake latitude + N -S **** Enter data****
+lonE = 149.1                                     # quake longitude + E - W **** Enter data****
+depth = 10                             # quake depth, km **** Enter data****
+mag = 2.8                             # quake magnitude **** Enter data****
+eventID = 'rs2024spsmum'               # ID for the event **** Enter data****
+locE = "Jerrawa, NSW, Asutralia"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 9, 21, 21, 24, 27) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -31.9                                    # quake latitude + N -S **** Enter data****
+lonE = -66.8                                     # quake longitude + E - W **** Enter data****
+depth = 130                             # quake depth, km **** Enter data****
+mag = 6.0                             # quake magnitude **** Enter data****
+eventID = 'rs2024ssghew'               # ID for the event **** Enter data****
+locE = "La Rioja Province, Argentina"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 9, 23, 19, 51, 3) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -0.1                                    # quake latitude + N -S **** Enter data****
+lonE = 122.9                                     # quake longitude + E - W **** Enter data****
+depth = 149                             # quake depth, km **** Enter data****
+mag = 6.0                             # quake magnitude **** Enter data****
+eventID = 'rs2024svuqms'               # ID for the event **** Enter data****
+locE = "Minahassa Peninsula, Sulawesi"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 9, 26, 2, 42, 4) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -34.8                                    # quake latitude + N -S **** Enter data****
+lonE = 149.1                                     # quake longitude + E - W **** Enter data****
+depth = 10                             # quake depth, km **** Enter data****
+mag = 3.2                             # quake magnitude **** Enter data****
+eventID = 'rs2024szzskv'               # ID for the event **** Enter data****
+locE = "Jerrawa, NSW, Australia"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 9, 26, 19, 19, 28) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -17.2                                    # quake latitude + N -S **** Enter data****
+lonE = 66.5                                     # quake longitude + E - W **** Enter data****
+depth = 10                             # quake depth, km **** Enter data****
+mag = 6.3                             # quake magnitude **** Enter data****
+eventID = 'rs2024tbgtyd'               # ID for the event **** Enter data****
+locE = "Mauritius-Reunion Region"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 9, 30, 12, 21, 58) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = 53.0                                    # quake latitude + N -S **** Enter data****
+lonE = 160.3                                     # quake longitude + E - W **** Enter data****
+depth = 32                             # quake depth, km **** Enter data****
+mag = 5.9                             # quake magnitude **** Enter data****
+eventID = 'rs2024tibvpm'               # ID for the event **** Enter data****
+locE = "Near East Coast of Kamchatka"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 9, 30, 17, 1, 19) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -30.5                                    # quake latitude + N -S **** Enter data****
+lonE = 150.6                                     # quake longitude + E - W **** Enter data****
+depth = 10                             # quake depth, km **** Enter data****
+mag = 3.2                             # quake magnitude **** Enter data****
+eventID = 'rs2024tilcjj'               # ID for the event **** Enter data****
+locE = "Red Hill, NSW, Australia"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 10, 7, 23, 59, 4) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -33.5                                    # quake latitude + N -S **** Enter data****
+lonE = -178.6                                     # quake longitude + E - W **** Enter data****
+depth = 10                             # quake depth, km **** Enter data****
+mag = 5.8                             # quake magnitude **** Enter data****
+eventID = 'rs2024tvvavs'               # ID for the event **** Enter data****
+locE = "South of Kermadec Islands"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 10, 10, 19, 1, 29) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -34.8                                    # quake latitude + N -S **** Enter data****
+lonE = 149.2                                     # quake longitude + E - W **** Enter data****
+depth = 5                             # quake depth, km **** Enter data****
+mag = 2.8                             # quake magnitude **** Enter data****
+eventID = 'rs2024uayisr'               # ID for the event **** Enter data****
+locE = "Oolong, NSW, Australia"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 10, 12, 17, 43, 45) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = 10.5                                    # quake latitude + N -S **** Enter data****
+lonE = -86.1                                     # quake longitude + E - W **** Enter data****
+depth = 19                             # quake depth, km **** Enter data****
+mag = 6.2                             # quake magnitude **** Enter data****
+eventID = 'rs2024uenfon'               # ID for the event **** Enter data****
+locE = "Off Coast of Costa Rica"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 10, 13, 5, 39, 35) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -32.9                                    # quake latitude + N -S **** Enter data****
+lonE = 151.4                                     # quake longitude + E - W **** Enter data****
+depth = 5                             # quake depth, km **** Enter data****
+mag = 2.3                             # quake magnitude **** Enter data****
+eventID = 'rs2024ufkyiy'               # ID for the event **** Enter data****
+locE = "Quorrobolong, NSW, Australia"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 10, 16, 7, 46, 32) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = 38.3                                    # quake latitude + N -S **** Enter data****
+lonE = 38.8                                     # quake longitude + E - W **** Enter data****
+depth = 10                             # quake depth, km **** Enter data****
+mag = 6.0                             # quake magnitude **** Enter data****
+eventID = 'rs2024ulcikb'               # ID for the event **** Enter data****
+locE = "Türkiye"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 10, 21, 3, 24, 16) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -1.2                                    # quake latitude + N -S **** Enter data****
+lonE = 127.4                                     # quake longitude + E - W **** Enter data****
+depth = 16                             # quake depth, km **** Enter data****
+mag = 5.8                             # quake magnitude **** Enter data****
+eventID = 'rs2024utygul'               # ID for the event **** Enter data****
+locE = "Halmahera, Indonesia"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 10, 24, 16, 4, 39) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -32.9                                    # quake latitude + N -S **** Enter data****
+lonE = 151.3                                     # quake longitude + E - W **** Enter data****
+depth = 4                             # quake depth, km **** Enter data****
+mag = 2.5                             # quake magnitude **** Enter data****
+eventID = 'rs2024vakqqy'               # ID for the event **** Enter data****
+locE = "Paxton, NSW, Australia"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 10, 25, 19, 50, 23) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -33.1                                    # quake latitude + N -S **** Enter data****
+lonE = 147.6                                     # quake longitude + E - W **** Enter data****
+depth = 10                             # quake depth, km **** Enter data****
+mag = 3.0                             # quake magnitude **** Enter data****
+eventID = 'rs2024vcnwbk'               # ID for the event **** Enter data****
+locE = "Yarrabandai, NSW, Australia"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 10, 28, 21, 47, 9) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -34.8                                    # quake latitude + N -S **** Enter data****
+lonE = 149.3                                     # quake longitude + E - W **** Enter data****
+depth = 1                             # quake depth, km **** Enter data****
+mag = 1.6                             # quake magnitude **** Enter data****
+eventID = 'rs2024viexik'               # ID for the event **** Enter data****
+locE = "Gunning, NSW, Australia"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 10, 30, 1, 0, 14) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -32.33                                    # quake latitude + N -S **** Enter data****
+lonE = 149.85                                     # quake longitude + E - W **** Enter data****
+depth = 0                             # quake depth, km **** Enter data****
+mag = 2.8                             # quake magnitude **** Enter data****
+eventID = 'unknown'               # ID for the event **** Enter data****
+locE = "Wilpinjong Coal Mine, Wilpinjong, NSW, Australia"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 10, 30, 12, 18, 52) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -4.5                                    # quake latitude + N -S **** Enter data****
+lonE = 150.1                                     # quake longitude + E - W **** Enter data****
+depth = 521                             # quake depth, km **** Enter data****
+mag = 6.0                             # quake magnitude **** Enter data****
+eventID = 'rs2024vldnjq'               # ID for the event **** Enter data****
+locE = "New Britain Region, Papua New Guinea"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 10, 30, 20, 15, 19) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = 43.5                                    # quake latitude + N -S **** Enter data****
+lonE = -127.8                                     # quake longitude + E - W **** Enter data****
+depth = 10                             # quake depth, km **** Enter data****
+mag = 6.0                             # quake magnitude **** Enter data****
+eventID = 'rs2024vltiaq'               # ID for the event **** Enter data****
+locE = "Off Coast of Oregon"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 11, 4, 19, 41, 54) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -36.7                                    # quake latitude + N -S **** Enter data****
+lonE = 144.5                                     # quake longitude + E - W **** Enter data****
+depth = 0                             # quake depth, km **** Enter data****
+mag = 3.6                             # quake magnitude **** Enter data****
+eventID = 'rs2024vuwvoc'               # ID for the event **** Enter data****
+locE = "Fosterville, Victoria, Australia"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 11, 6, 3, 58, 43) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -32.37                                    # quake latitude + N -S **** Enter data****
+lonE = 150.88                                     # quake longitude + E - W **** Enter data****
+depth = 0                             # quake depth, km **** Enter data****
+mag = 2.0                             # quake magnitude **** Enter data****
+eventID = 'unknown'               # ID for the event **** Enter data****
+locE = "Mt Arthur South Coal Mine, Muswellbrook, NSW, Australia"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 11, 6, 10, 23, 27) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -32.4                                    # quake latitude + N -S **** Enter data****
+lonE = 151.1                                     # quake longitude + E - W **** Enter data****
+depth = 3                             # quake depth, km **** Enter data****
+mag = 2.6                             # quake magnitude **** Enter data****
+eventID = 'rs2024vxvucd'               # ID for the event **** Enter data****
+locE = "Ravensworth, NSW, Australia"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 11, 6, 14, 36, 23) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -4.8                                    # quake latitude + N -S **** Enter data****
+lonE = 153.3                                     # quake longitude + E - W **** Enter data****
+depth = 52                             # quake depth, km **** Enter data****
+mag = 5.9                             # quake magnitude **** Enter data****
+eventID = 'rs2024vyedzs'               # ID for the event **** Enter data****
+locE = "New Ireland Region, Papua New Guinea"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 11, 6, 15, 55, 8) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -18.2                                    # quake latitude + N -S **** Enter data****
+lonE = -177.8                                     # quake longitude + E - W **** Enter data****
+depth = 432                             # quake depth, km **** Enter data****
+mag = 5.9                             # quake magnitude **** Enter data****
+eventID = 'rs2024vygtxf'               # ID for the event **** Enter data****
+locE = "Fiji Islands Region"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 11, 12, 1, 12, 57) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -32.3                                    # quake latitude + N -S **** Enter data****
+lonE = 150.8                                     # quake longitude + E - W **** Enter data****
+depth = 10                             # quake depth, km **** Enter data****
+mag = 4.2                             # quake magnitude **** Enter data****
+eventID = 'rs2024widwzm'               # ID for the event **** Enter data****
+locE = "Wybong, NSW, Australia"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 11, 15, 5, 26, 12) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -32.32                                    # quake latitude + N -S **** Enter data****
+lonE = 149.9                                     # quake longitude + E - W **** Enter data****
+depth = 0                             # quake depth, km **** Enter data****
+mag = 2.3                             # quake magnitude **** Enter data****
+eventID = 'unknown'               # ID for the event **** Enter data****
+locE = "Wilpinjong Coal Mine, Wollar, NSW, Australia"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 11, 17, 12, 16, 29) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = 29.1                                    # quake latitude + N -S **** Enter data****
+lonE = 131.4                                     # quake longitude + E - W **** Enter data****
+depth = 8                             # quake depth, km **** Enter data****
+mag = 6.1                             # quake magnitude **** Enter data****
+eventID = 'rs2024wsemth'               # ID for the event **** Enter data****
+locE = "Southeast of Ryukyu Islands"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 11, 20, 14, 43, 53) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = 79.8                                    # quake latitude + N -S **** Enter data****
+lonE = 1.5                                     # quake longitude + E - W **** Enter data****
+depth = 14                             # quake depth, km **** Enter data****
+mag = 5.7                             # quake magnitude **** Enter data****
+eventID = 'rs2024wxwovl'               # ID for the event **** Enter data****
+locE = "Greenland Sea"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 11, 23, 19, 4, 30) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -17.9                                    # quake latitude + N -S **** Enter data****
+lonE = -178.4                                     # quake longitude + E - W **** Enter data****
+depth = 592                             # quake depth, km **** Enter data****
+mag = 5.9                             # quake magnitude **** Enter data****
+eventID = 'rs2024xdskay'               # ID for the event **** Enter data****
+locE = "Fiji Islands Region"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 11, 26, 13, 47, 3) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = 37.0                                    # quake latitude + N -S **** Enter data****
+lonE = 136.3                                     # quake longitude + E - W **** Enter data****
+depth = 10                             # quake depth, km **** Enter data****
+mag = 6.1                             # quake magnitude **** Enter data****
+eventID = 'rs2024xivbeb'               # ID for the event **** Enter data****
+locE = "Near West Coast of Honshu, Japan"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 11, 27, 22, 3, 56) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -37.7                                    # quake latitude + N -S **** Enter data****
+lonE = 179.7                                     # quake longitude + E - W **** Enter data****
+depth = 19                             # quake depth, km **** Enter data****
+mag = 5.8                             # quake magnitude **** Enter data****
+eventID = 'rs2024xlhgez'               # ID for the event **** Enter data****
+locE = "Off East Coast of North Island, New Zealand"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 12, 3, 7, 29, 29) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -41.3                                    # quake latitude + N -S **** Enter data****
+lonE = 85.7                                     # quake longitude + E - W **** Enter data****
+depth = 10                             # quake depth, km **** Enter data****
+mag = 5.1                             # quake magnitude **** Enter data****
+eventID = 'rs2024xvepyl'               # ID for the event **** Enter data****
+locE = "Southeast Indian Ridge"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 12, 5, 18, 44, 19) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = 40.4                                    # quake latitude + N -S **** Enter data****
+lonE = -125.0                                     # quake longitude + E - W **** Enter data****
+depth = 1                             # quake depth, km **** Enter data****
+mag = 7.0                             # quake magnitude **** Enter data****
+eventID = 'rs2024xzsljb'               # ID for the event **** Enter data****
+locE = "Off Coast of Northern California"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 12, 8, 13, 59, 27) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -32.2                                    # quake latitude + N -S **** Enter data****
+lonE = 149.2                                     # quake longitude + E - W **** Enter data****
+depth = 10                             # quake depth, km **** Enter data****
+mag = 2.7                             # quake magnitude **** Enter data****
+eventID = 'rs2024yewejr'               # ID for the event **** Enter data****
+locE = "Cobbora, NSW, Australia"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 12, 9, 15, 19, 30) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -34.3                                    # quake latitude + N -S **** Enter data****
+lonE = 149.0                                     # quake longitude + E - W **** Enter data****
+depth = 10                             # quake depth, km **** Enter data****
+mag = 2.6                             # quake magnitude **** Enter data****
+eventID = 'rs2024yguogh'               # ID for the event **** Enter data****
+locE = "Taylors Flat, NSW, Australia"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 12, 12, 4, 32, 5) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -32.32                                    # quake latitude + N -S **** Enter data****
+lonE = 149.925                                     # quake longitude + E - W **** Enter data****
+depth = 0                             # quake depth, km **** Enter data****
+mag = 2.4                             # quake magnitude **** Enter data****
+eventID = 'unknown'               # ID for the event **** Enter data****
+locE = "Wilpinjong Coal Mine, Wilpinjong, NSW, Australia"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 12, 13, 23, 38, 18) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -35.3                                    # quake latitude + N -S **** Enter data****
+lonE = -70.7                                     # quake longitude + E - W **** Enter data****
+depth = 109                             # quake depth, km **** Enter data****
+mag = 6.4                             # quake magnitude **** Enter data****
+eventID = 'rs2024yotzog'               # ID for the event **** Enter data****
+locE = "Chile-Argentina Border Region"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 12, 15, 15, 3, 37) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -18.6                                    # quake latitude + N -S **** Enter data****
+lonE = -175.3                                     # quake longitude + E - W **** Enter data****
+depth = 213                             # quake depth, km **** Enter data****
+mag = 5.9                             # quake magnitude **** Enter data****
+eventID = 'rs2024yrujwe'               # ID for the event **** Enter data****
+locE = "Tonga Islands"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 12, 17, 1, 47, 26) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -17.7                                    # quake latitude + N -S **** Enter data****
+lonE = 168.0                                     # quake longitude + E - W **** Enter data****
+depth = 57                             # quake depth, km **** Enter data****
+mag = 7.3                             # quake magnitude **** Enter data****
+eventID = 'rs2024yulllt'               # ID for the event **** Enter data****
+locE = "Vanuatu Islands"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 12, 27, 12, 47, 37) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = 47.2                                    # quake latitude + N -S **** Enter data****
+lonE = 151.2                                     # quake longitude + E - W **** Enter data****
+depth = 146                             # quake depth, km **** Enter data****
+mag = 6.8                             # quake magnitude **** Enter data****
+eventID = 'rs2024znqpey'               # ID for the event **** Enter data****
+locE = "Kuril Islands"      # location name **** Enter data****
+
+eventTime = UTCDateTime(2024, 12, 27, 22, 19, 27) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -33.5                                    # quake latitude + N -S **** Enter data****
+lonE = 149.0                                     # quake longitude + E - W **** Enter data****
+depth = 0                             # quake depth, km **** Enter data****
+mag = 2.6                             # quake magnitude **** Enter data****
+eventID = 'rs2024zojnzb'               # ID for the event **** Enter data****
+locE = "Panuara, NSW, Australia"      # location name **** Enter data****
