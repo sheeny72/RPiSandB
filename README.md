@@ -1317,4 +1317,144 @@ def band_G_waveforms(lwaves, bandGs):
 
     """
 
+# Q3DSEReport4.py
+This code can be run on any RS3D Raspberry Shake on the Raspberry Shake Network.
+It reads all three channels (EHZ, EHE and EHN).
+It is an update of Q3DSEReport3.py
 
+There is latent code included for use of local inventory files (just need to uncomment these lines if required).
+
+Output includes:
+Filtered velocity traces for EHZ, EHE and EHN channels,
+Specific Energy Traces showing total Specific Energy and components from each of the 3 channels,
+Unfiltered spectrogram of all channels,
+Power Spectral Density plots for all three channels;
+Fast Fourier Transform plot of all three channels,
+Background Noise levels on all three channels,
+a table of Phase arrival times,
+Spherical Ray Path plot,
+Nearside Perspective map of the event and station,
+Particle Motion Plots,
+Event details,
+Quake Energy including TNT equivalent,
+Phase key,
+Notes.
+
+The background noise limits and Specific Energy plot were developed to assist identification of weak arrivals.
+
+Copy and save the files "RS logo.png" to the same location as Q3DSEReport3.
+
+Most plot information is entered in lines 83 to 126.
+Bandpass Filter corners are specified in lines 136 to 148.
+
+The program demonstrates:
+Reading station traces,
+Removing instrument response,
+Trace manipulation/calculations,
+Secondary axes,
+Plotting arrivals,
+Figure and Axes Text.
+
+See examples for QR3DReoport3.py as nothing in presentations has changed.
+
+Only changes are the addition of Love Surface Wave Arrival times, an improved estimation of the Raleight Surface
+Wave Arrival time and an internal command update to suit Obspy v 1.4.1.
+
+# LocalStns10.py
+This code can be run on any Raspberry Shake or Raspberry Shake and Boom on the Raspberry Shake Network.
+It reads the EHZ or SHZ (vertical geophone) channel of each station.
+
+This is an upgrade of LocalStns8.py. OpenStreetMap imagery has been added for the background of the map and also allows instrument response from local file rather than FDSN server.
+As in LocalStns7.py, provision has been made to determine the station to quake distance from the difference in P and S arrival times, and radius circles are plotted.
+The quake location is at the intersection of the circles. The tightness of the intersections gives an indication of the accuracy of the estimation of the position of the quake.
+
+Output Includes:
+A Section Plot of Station Displacement, Velocity or Acceleration Traces,
+A customised map of the area of the stations and the event/earthquake,
+Estimates of the MLDv, MLVv and/or MLAv for each trace,
+Calculation of the total "quake" energy,
+Individual high resolution plots of each trace for estimation of P and S arrival times.
+
+This program can be used to plot a section across multiple local stations for a known earthquake,
+or it can also be used to locate an unregistered event such as a small local earthquake, or mine blast
+by trial and error on the event location and timing.
+
+The program now does automatically save plots, if desired.
+
+The delay from the event to the start of the plotis now active. The delay can be positive or negative. A positive delay will trim the traces to suit a distant event, while a negative delay will extend the traces before the event time to allow things like  the start of mineblast sequence to be shown on nearby Shakes.
+
+Intended workflow:
+
+1. Enter EventTime in line 195 at the whole minute 30 to 60s ahead of the observed event on the helicorder.
+2. Set rplots to True, and plotrs to False in lines 204 and 205 respectively.
+3. Select stations to include in the station list in lines 26 to 62.
+4. Run LocalStns7. A high resolution plot of the trace of each station will be produced, along with the final section plot and map. Comment out any stations (in lines 26 to 62) that do not produce a useful trace.
+5. Refer to each high resolution trace plot and estimate the P and S phase arrival times. Record these in pstimes in lines 64 to 74. Ensure you have a pair of times for each station - no more no less. Comment out unwanted lines, or add additional lines as required. Where one or both arrivals is NOT clear, consider changing output (e.g. Displacement, velocity, or acceleration) to get clear arrivals. Where one arrival is not clear, correct the timing for this arrival on successive iterations so it is not misleading. DO NOT ADJUST CLEAR ARRIVALS (other than to correct errors) - these are critical to accurate location and timing.
+6. Change plotrs to True on line 205.
+7. Re-run LocalStns7. This time the high resolution trace plots will have the estimated P and S arrival times plotted on them for checking. The Final map will also have circles plotted on it showin
+8. g how far the quake is from each station. The epicentre will be at the intersection of all the circles.
+9. Adjust the quake latitude (latE) and longitude (longE) to match the intersection of circles in lines 196 and 197.
+10. Adjust the EventTime again to better match the arrivals on the section plot. (Remember to correct the pstimes whenever the EventTime is adjusted. i.e. if EventTime is increased by 18s, decrease the pstimes by 18s!)
+11. Red dots are plotted on the section plot for each station which are the estimated arrival times from the high resolution plots. This is to aid precision in both location and timing adjustments.
+12. Re-run LocalStns7 as many times as required to refine the position and timing of the quake.
+13. Once position and timing of the quake is determined, set rplots to False for subsequent runs so the high resolution trace plots don't have to be produced every time the final plot is produced.
+14. Adjust the OpenStreetMap imagery zoom level for best appearance in line 353.
+
+N.B. Each high resolution trace plot shows the stream index number in the legend to avoid confusion.
+
+# QR14any.py
+This code can be run on any Raspberry Shake or Raspberry Shake and Boom on the Raspberry Shake Network.
+It reads the EHZ channel (vertical geophone) which is common to all models (except the Raspberry Boom). Some models may use SHZ instead of EHZ. This is an upgrade of QReport10any.py and QR11any.py.
+
+Output includes:
+Filtered Displacement trace,
+Filtered Velocity trace,
+Filtered Acceleration trace,
+Filtered Jerk trace,
+Specific Energy trace,
+Unfiltered velocity spectrogram,
+Power Spectral Density plot (of filtered displacement, velocity, acceleration and jerk and optionally unfiltered velocity),
+FFT Spectrum plot of (of filtered displacement, velocity, acceleration and/or jerk and optionally unfiltered velocity),
+Spherical Ray Path Plot,
+Nearside Perspective Map Plot,
+Background Noise in/at the station at the time of the event,
+trace maxima for filtered displacement, velocity, acceleration, specific energy and jerk,
+Signal to noise ratios for filtered displacement, velocity, acceleration and specific energy plots,
+Phase arrival times (including Love Surface Waves and a revised Raleigth Surface Wave arrival time,
+Percentage vertical component of the phase arrival,
+Event details,
+Quake Energy,
+Phase key,
+Estimations of the earthquake magnitude calculated from the maximum displacement (MLDv), veloity (MLVv) and Acceleration (MLAv) amplitudes. These can be turned off when not required.
+Text for Social Media (Twitter) post (to copy),
+Notes.
+
+The background noise limits and Specific Energy plot were developed to assist identification of weak arrivals.
+
+Copy and save the file "RS logo.png" to the same location as QR14any.
+
+Most plot information is entered in lines 104 to 143.
+Bandpass Filter corners are specified in lines 154 to 168.
+
+The program demonstrates:
+Reading station traces,
+Selecting the active epoch from inventory data,
+Distiguishing a Raspberry Shake and Boom from a Raspberry Shake,
+Removing instrument response,
+Trace manipulation/calculations,
+Differentiation of a Trace,
+Secondary axes,
+Plotting arrivals,
+colour coding arrival plots consistent with TAUp,
+calculation and plotting of FFT spectrum,
+use of gridspec to similate a stream plot with different colours for each trace,
+automated zooming of nearside perspective map to suit quake/station separation,
+automatic selection of EHZ or SHZ channel as appropriate (no need to manually change code on error),
+calculation of Rayleigh Surface Wave arrival time,
+Calculation of Infrasound arrival time for correlation of Infrasound for explosive events such as some volcanic eruptions;
+Figure and Axes Text.
+
+Example output files are M6.5Quake Vanuatu Islands*.png
+Latest example file showing estimated earthquake magnitudes is M6.1Quake Timor Region*.png
+
+Code was also updated to suit Obspy v1.4.1.
