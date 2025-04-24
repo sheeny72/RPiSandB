@@ -88,14 +88,20 @@ def plot_se_noiselims(ax, uplim):
 def divTrace(tr, n):            # divide trace into n equal parts for background noise determination
     return tr.__truediv__(n)
 
+def trim_env(env, duration):
+    if len(env) > duration*100:
+        env = env[0:duration*100]   #make sure all envelopess are the same length
+        
+    return env
+
 #enter event data
-eventTime = UTCDateTime(2025, 2, 13, 2, 6, 11) # (YYYY, m, d, H, M, S) **** Enter data****
-latE = -32.53                                   # quake latitude + N -S **** Enter data****
-lonE = 151.02                                     # quake longitude + E - W **** Enter data****
-depth = 0                             # quake depth, km **** Enter data****
-mag = 2.2                             # quake magnitude **** Enter data****
-eventID = 'unknown'               # ID for the event **** Enter data****
-locE = "Hunter Valley Operations Coal Mine, Warkworth, NSW, Australia"      # location name **** Enter data****
+eventTime = UTCDateTime(2025, 4, 22, 10, 17, 13) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = 4.5                                   # quake latitude + N -S **** Enter data****
+lonE = 127.8                                     # quake longitude + E - W **** Enter data****
+depth = 118                             # quake depth, km **** Enter data****
+mag = 6.2                             # quake magnitude **** Enter data****
+eventID = 'rs2025hwoboz'               # ID for the event **** Enter data****
+locE = "Talaud Islands, Indonesia"      # location name **** Enter data****
 
 # set the station name and download the response information
 stn = 'R4FA0'      # your station name
@@ -165,6 +171,7 @@ channels = ['EHZ', 'EHE', 'EHN'] # ENx = accelerometer channels; EHx or SHZ = ge
 st = Stream()
 for ch in channels:
     trace = rs.get_waveforms('AM', stn, '00', ch, start, end)
+    #print(len(trace[0].data))
     st += trace
 st.merge(method=0, fill_value='latest')         # fill in any gaps in the data to prevent a crash
 st.detrend(type='demean')                       # demean the data
@@ -201,9 +208,9 @@ print(arrs)             # print the arrivals for reference when setting delay an
 no_arrs = len(arrs)     # the number of arrivals
 
 #calculate Rayleigh and Love Wave arrival Time
-rayt = distance/3.4869
+rayt = distance/3.2206
 print("Rayleigh Arrival Time: ", rayt)
-lovet = distance/4.47
+lovet = distance/4.2941
 print("Love Arrival Time: ", lovet)
 
 # Calculate Earthquake Total Energy
@@ -241,10 +248,18 @@ for j in range (0, bns):                # find the sample interval with the mini
 bnsestd = (bnZstd*bnZstd+bnEstd*bnEstd+bnNstd*bnNstd)/2           # calculate the max background noise level for the specific energy
 
 # Create Signal Envelopes
-z_env = filter.envelope(st[2].data)     # create displacement envelope
-e_env = filter.envelope(st[0].data)     # create velocity envelope
-n_env = filter.envelope(st[1].data)     # create acceleration envelope
-se_env=(z_env*z_env+e_env*e_env+n_env*n_env)/2    # create specific energy envelope from velocity envelope! - comment out undesired method.
+z_env = filter.envelope(st[2].data)     # create EHZ envelope
+e_env = filter.envelope(st[0].data)     # create EHE envelope
+n_env = filter.envelope(st[1].data)     # create EHN envelope
+z_env = trim_env(z_env, duration)
+n_env = trim_env(n_env, duration)
+e_env = trim_env(e_env, duration)
+
+se_env=(z_env*z_env+e_env*e_env+n_env*n_env)/2    # create total specific energy envelope (vector sum)
+se_env = trim_env(se_env, duration)
+st[0].data = trim_env(st[0].data, duration)
+st[1].data = trim_env(st[1].data, duration)
+st[2].data = trim_env(st[2].data, duration)
 
 # set up map plot
 if great_angle_deg <5:      #set satellite height based on separation

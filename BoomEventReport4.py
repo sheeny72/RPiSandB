@@ -37,25 +37,37 @@ def energy_units(a):
     else:
         return str(round(a,3))+'J. ('
 
+def vmarker(ax, t, text):
+    axb, axt = ax.get_ylim()
+    ax.axvline(x=t, linewidth=0.5, color='k')
+    ax.text(t-2, (axt+axb)/2, text, alpha=0.5, color='k', ha='center', va='center', rotation=90)
+    return
+     
 # define start and end times
-eventTime = UTCDateTime(2022, 7, 8, 21, 5, 0) # (YYYY, m, d, H, M, S)
-delay = 1050               #delay from event time to start of plot
+eventTime = UTCDateTime(2025, 2, 10, 5, 17, 5) # (YYYY, m, d, H, M, S) **** Enter data****
+delay = 0               #delay from event time to start of plot
 start = eventTime + delay   #calculate the plot start time
-duration = 200               #duration of plot in seconds
+duration = 45               #duration of plot in seconds
 end = start + duration                # start plus plot duration in seconds (recommend a minimum of 10s)
 
 # Name the Event
-eventName = 'SpaceX Dragon Crew 1 Trunk Re-Entry'       # Name for the Report
-distancem = 370000                    #enter distance in metres! Enter 0 to omit.
+eventName = 'M-0.6 Blast Oberon Quarries'       # Name for the Report
+distancem = 4200                   #enter distance in metres! Enter 0 to omit.
 if distancem <=0:
     distance = 'unknown'
 else:
     distance = str(distancem/1000)+' kms.'    #distance to the source in kms
 notes1 = ''  #add notes about event if desired
-notes2 = ''  #add more notes if req'd
+notes2 = ""   #add more notes if req'd
+vmtime = 13    # if 0, no vertical marker
+vmtext = 'Infrasound arrival'
+vmtime1 = 0   # if 0, no vertical marker
+vmtext1 = 'Infrasound arrival'
+vmtime2 = 0    # if 0, no vertical marker
+vmtext2 = 'Echo?'
 
 # set up bandpass filter
-filt = [0.49, 0.5, 10, 10.1]   #edit filter values to suit
+filt = [0.01, 0.1, 49, 50]   #edit filter values to suit
 
 #Ready to Save the Plot?
 saveFig = False
@@ -65,6 +77,7 @@ client = Client('https://data.raspberryshake.org/')
 
 # get data from the FSDN server and detrend it
 STATION = "R21C0"               # station name
+#STATION = "R5968"               # station name
 st = client.get_waveforms("AM", STATION, "00", "HDF", starttime=start, endtime=end, attach_response=True)
 st.merge(method=0, fill_value='latest')
 st.detrend(type="demean")
@@ -154,6 +167,31 @@ ax7.xaxis.set_minor_locator(AutoMinorLocator(10))
 ax7.yaxis.set_minor_locator(AutoMinorLocator(5))
 ax7.margins(x=0)
 
+#add arrival marker(s)
+if vmtime > 0:
+    vmarker(ax1, vmtime, vmtext)
+    vmarker(ax3, vmtime, vmtext)
+    vmarker(ax4, vmtime, vmtext)
+    vmarker(ax5, vmtime-delay, vmtext)
+    vmarker(ax6, vmtime, vmtext)
+    vmarker(ax7, vmtime, vmtext)
+
+if vmtime1 > 0:
+    vmarker(ax1, vmtime1, vmtext1)
+    vmarker(ax3, vmtime1, vmtext1)
+    vmarker(ax4, vmtime1, vmtext1)
+    vmarker(ax5, vmtime1-delay, vmtext1)
+    vmarker(ax6, vmtime1, vmtext1)
+    vmarker(ax7, vmtime1, vmtext1)
+
+if vmtime2 > 0:
+    vmarker(ax1, vmtime2, vmtext2)
+    vmarker(ax3, vmtime2, vmtext2)
+    vmarker(ax4, vmtime2, vmtext2)
+    vmarker(ax5, vmtime2-delay, vmtext2)
+    vmarker(ax6, vmtime2, vmtext2)
+    vmarker(ax7, vmtime2, vmtext2)
+
 #calculate maximum sound pressure level sound intensity and source power
 pmax = abs(resp_removed[0].max())   #find the max pressure amplitude
 splmax = 10*np.log10(pmax*pmax) + 93.979400087        #convert to sound pressure level
@@ -239,7 +277,7 @@ ax1.set_ylabel("Raw Counts")
 ax2.set_ylabel("Power Spectral Density")
 ax2.set_xlabel('Frequency,Hz',labelpad=-4)
 ax3.set_ylabel("Pressure (Pa) ("+str(filt[1])+" to "+str(filt[2])+"Hz)")
-ax4.set_ylabel("Infrasound Pressure Level (dB) ("+str(filt[1])+" to "+str(filt[2])+"Hz)", size='small')
+ax4.set_ylabel("Infrasound Pressure Level (dBL) ("+str(filt[1])+" to "+str(filt[2])+"Hz)", size='small')
 ax5.set_ylabel("Frequency, Hz", size='small')
 ax6.set_ylabel("Infrasound Intensity (W/m²)\n("+str(filt[1])+" to "+str(filt[2])+"Hz)", size='small')
 ax7.set_ylabel("Energy (J/m²)\n("+str(filt[1])+" to "+str(filt[2])+"Hz)", size='small')
@@ -268,7 +306,7 @@ ax7.grid(color='dimgray', which='minor', ls = ':', lw = 0.33)
 # Report Peak Calculated Values
 fig.text(0.11, 0.69, 'Peak Count = '+str(int(cmax)))
 fig.text(0.55, 0.69, 'Peak Pressure = '+str(round(pmax,3))+'Pa. ('+str(filt[1])+" to "+str(filt[2])+"Hz)")    #report the peak Pressure
-fig.text(0.55, 0.39, 'Peak Infrasound Pressure Level ='+str(round(splmax,1))+'dB. ('+str(filt[1])+" to "+str(filt[2])+"Hz)")   #report peak sound pressure level
+fig.text(0.55, 0.39, 'Peak Infrasound Pressure Level ='+str(round(splmax,1))+' dBL. ('+str(filt[1])+" to "+str(filt[2])+"Hz)")   #report peak sound pressure level
 fig.text(0.55, 0.3, 'Peak Infrasound Intensity = '+f"{sintensity:.3}"+' W/m². ('+str(filt[1])+" to "+str(filt[2])+"Hz)")
 fig.text(0.55, 0.15, 'Total Energy = '+f"{aemax:.3}"+' J/m².')
 if distancem >0:        #display the power and energy if the distance is known
@@ -284,7 +322,7 @@ plt.subplots_adjust(hspace=0.7, wspace=0.13, right=0.92, left=0.1, top=0.92, bot
 
 # save the final figure
 if saveFig:
-    plt.savefig('D:\Pictures\Raspberry Shake and Boom\\'+eventName+STATION+' HDF '+start.strftime('%Y%m%d %H%M%S UTC'))  #comment this line out till figure is final
+    plt.savefig('D:/Pictures/Raspberry Shake and Boom/2025/'+eventName+STATION+' HDF '+start.strftime('%Y%m%d %H%M%S UTC')+'.png')  #comment this line out till figure is final
 
 # show the final figure
 plt.show()

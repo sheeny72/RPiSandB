@@ -118,17 +118,18 @@ def sax(secax, tix):    #pass secondary axis, and ticks
     secax.xaxis.set_minor_locator(AutoMinorLocator(10))
 
 #enter event data
-eventTime = UTCDateTime(2025, 2, 13, 2, 6, 11) # (YYYY, m, d, H, M, S) **** Enter data****
-latE = -32.53                                   # quake latitude + N -S **** Enter data****
-lonE = 151.02                                     # quake longitude + E - W **** Enter data****
-depth = 0                             # quake depth, km **** Enter data****
-mag = 2.2                             # quake magnitude **** Enter data****
-eventID = 'unknown'               # ID for the event **** Enter data****
-locE = "Hunter Valley Operations Coal Mine, Warkworth, NSW, Australia"      # location name **** Enter data****
+eventTime = UTCDateTime(2025, 4, 22, 10, 17, 13) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = 4.5                                   # quake latitude + N -S **** Enter data****
+lonE = 127.8                                     # quake longitude + E - W **** Enter data****
+depth = 118                             # quake depth, km **** Enter data****
+mag = 6.2                             # quake magnitude **** Enter data****
+eventID = 'rs2025hwoboz'               # ID for the event **** Enter data****
+locE = "Talaud Islands, Indonesia"      # location name **** Enter data****
 
 # set the station name and download the response information
 stn = 'R21C0'      # station name
 #stn = 'R5968'      # station name
+#stn = 'R4FA0'      # station name
 nw = 'AM'          # network name
 
 """  Use this routine for local inventory files
@@ -241,9 +242,9 @@ print(arrs)             # print the arrivals for reference when setting delay an
 no_arrs = len(arrs)     # the number of arrivals
 
 #calculate Rayleigh and Love Wave arrival Time
-rayt = distance/3.4869
+rayt = distance/3.2206
 print("Rayleigh Arrival Time: ", rayt)
-lovet = distance/4.47
+lovet = distance/4.2941
 print("Love Arrival Time: ", lovet)
 
 # Calculate infrasound travel time for Boom signal - may be useful for explosions and eruptions

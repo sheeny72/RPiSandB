@@ -31,23 +31,24 @@ def stationList(sl):
     sl += ['R21C0']    #Oberon
     sl += ['R4FA0']    #Oberon
     sl += ['R5968']    #Oberon
-    #sl += ['R1564']    #Lithgow
+    sl += ['R1564']    #Lithgow
     sl += ['R811A']    #Mudgee
     sl += ['R9AF3']    #Gulgong
     #sl += ['R571C']    #Coonabarabran
-    #sl += ['R6D2A']    #Coonabarabran
-    #sl += ['RF35D']    #Narrabri
+    sl += ['S877D']    #Coonabarabran
+    sl += ['R6D2A']    #Coonabarabran
+    sl += ['RF35D']    #Narrabri
     sl += ['R7AF5']    #Muswellbrook
     #sl += ['R26B1']    #Murrumbateman
     #sl += ['R3756']    #Chatswood
     #sl += ['R9475']    #Sydney
-    #sl += ['R6707']    #Gungahlin
-    #sl += ['R69A2']    #Penrith
-    #sl += ['R7F01']    #Canberra
+    sl += ['R6707']    #Gungahlin
+    sl += ['R69A2']    #Penrith
+    sl += ['R7F01']    #Canberra
     #sl += ['RB18D']    #Canberra
     #sl += ['R9A9D']    #Brisbane
-    #sl += ['RCF6A']    #Brisbane
-    #sl += ['S6197']    #Heyfield
+    sl += ['RCF6A']    #Brisbane
+    sl += ['S6197']    #Heyfield
     #sl += ['RD371']    #Melbourne
     #sl += ['RC98F']    #Creswick
     #sl += ['RA20F']    #Broken Hill
@@ -70,25 +71,26 @@ def stationList(sl):
 
 # Build a list of ranges S-P times from hires trace plots
 # format [P time, S10.5],
-pstimes = [[29,51],
-          [29,51],
-          [30,52],
-          [25.4,43],
-          [22.5,38],
-          [5.5,9.7],
-          #[26,45],
-          #[15.8,27.3],
-          #[18,31.5],
-          #[17,37],
+pstimes = [
+          [28,48],
+          [28,48],
+          [29,50],
+          [23.5,40],
+          [8.7,14.5],
+          [4,6.7],
+          [24,40],
+          [37,63],
+          [19,31.8],
+          #[59,99],
           ]
 
 # Trace plotting routine for determining S - P time
-def trplot (tr, j):
+def trplot (tr, j, sname):
     fig1 = plt.figure(figsize=(10,7), dpi=100)       # set to page size in inches
     axtr = fig1.add_subplot(1,1,1)
     st1 = []
     st1 += tr
-    axtr.plot(st1[0].times(reftime=eventTime), st1[0].data, lw=0.25, color='k', label=str(j))      # displacement waveform
+    axtr.plot(st1[0].times(reftime=eventTime), st1[0].data, lw=0.25, color='k', label=str(j)+' '+sname)      # displacement waveform
     axtr.xaxis.set_major_locator(ticker.MultipleLocator(10))
     axtr.xaxis.set_minor_locator(ticker.AutoMinorLocator(10))
     axtr.grid(color='b', alpha=0.7, ls = '-.', lw = 0.33)
@@ -147,7 +149,7 @@ def buildStream(strm, op, rp):
             tr1[0].stats.mL = np.log10(tr1[0].stats.amp) + 2.234*np.log10(tr1[0].stats.distance/1000) - 1.199
         strm += tr1
         if rp:
-            trplot(tr1, i)
+            trplot(tr1, i, tr1[0].stats.station)
     #strm.plot(method='full', equal_scale=False)
     return strm #, nlat, xlat, nlon, xlon
 
@@ -211,24 +213,25 @@ places = [['Oberon', -33.704922, 149.862900, 2],
           ]
 
 # Enter event data (estimate by trial and error for unregistered events)    
-eventTime = UTCDateTime(2025, 2, 13, 2, 6, 11) # (YYYY, m, d, H, M, S) **** Enter data****
-latE = -32.53                                   # quake latitude + N -S **** Enter data****
-lonE = 151.02                                     # quake longitude + E - W **** Enter data****
-depth = 0                             # quake depth, km **** Enter data****
-mag = 2.2                             # quake magnitude **** Enter data****
-eventID = 'unknown'               # ID for the event **** Enter data****
-locE = "Hunter Valley Operations Coal Mine, Warkworth, NSW, Australia"      # location name **** Enter data****
+eventTime = UTCDateTime(2025, 4, 22, 16, 55, 3) # (YYYY, m, d, H, M, S) **** Enter data****
+latE = -32.7                                   # quake latitude + N -S **** Enter data****
+lonE = 150.9                                     # quake longitude + E - W **** Enter data****
+depth = 10                             # quake depth, km **** Enter data****
+mag = 5.1                             # quake magnitude **** Enter data****
+eventID = 'rs2025hxbgki'               # ID for the event **** Enter data****
+locE = "Milbrodale, NSW, Australia"      # location name **** Enter data****
 
 # perform range estimate plots
 rplots = False       # create hires trace plots for P and S arrival times
-plotrs = True      # plot arrival times on hires plots and radius circles on the map
-eq = False          # True if Earthquake, False if Mine Blast or other
+plotrs = False      # plot arrival times on hires plots and radius circles on the map
+eq = True          # True if Earthquake, False if Mine Blast or other
 output = 'DISP'
 #output = 'VEL'
 #output = 'ACC'
-delay = -10           # for future development for longer distance quakes - leave as 0 for now!
-duration = 100       #adjust duration to get detail required
+delay = 0           # for future development for longer distance quakes - leave as 0 for now!
+duration = 240       #adjust duration to get detail required
 leftAxis = 0
+distticks = 50e3
 save_plot = False
 
 # Make a list of stations
@@ -245,9 +248,9 @@ ft = [0.6, 0.7, 4, 4.1]
 #ft = [0.6, 0.7, 8, 8.1]
 #ft = [0.9, 1, 10, 10.1]
 #ft = [0.69, 0.7, 10, 10.1]
-#ft = [0.69, 0.7, 20, 20.1]
+ft = [0.69, 0.7, 20, 20.1]
 #ft = [2.9, 3, 20, 20.1]        #use for local quakes
-ft = [0.69, 0.7, 49, 50]
+#ft = [0.69, 0.7, 49, 50]
 
 if plotrs and (len(slist)!=len(pstimes)):
     print('Station and PS Times mismatch error!')
@@ -303,7 +306,7 @@ fig = plt.figure(figsize=(20,14), dpi=100)       # set to page size in inches
 
 #build the section plot
 ax1 = fig.add_subplot(1,2,1)
-st.plot(type='section', plot_dx=50e3, reftime=eventTime, recordlength=duration, time_down=True, linewidth=.3, alpha=0.8, grid_linewidth=.25, show=False, fig=fig)
+st.plot(type='section', plot_dx=distticks, reftime=eventTime, recordlength=duration, time_down=True, linewidth=.3, alpha=0.8, grid_linewidth=.25, show=False, fig=fig)
 ax1.xaxis.set_minor_locator(ticker.AutoMinorLocator(10))
 ax1.yaxis.set_minor_locator(ticker.AutoMinorLocator(10))
 
@@ -414,6 +417,7 @@ ax2.plot(lonE, latE,
 # print the lat, long, and event time beside the event marker
 #ax2.text(lonE+0.1, latE-0.05, "("+str(latE)+", "+str(lonE)+")\n"+eventTime.strftime('%d/%m/%y %H:%M:%S UTC'), ha='left')
 
+rerror = 0
 #plot station positions on map
 for tr in st:
     ax2.plot(tr.stats.longitude, tr.stats.latitude,
@@ -430,12 +434,20 @@ for tr in st:
         gd = Geodesic()
         # create the circle representing the range
         circ = gd.circle(lon=tr.stats.longitude, lat=tr.stats.latitude, radius=tr.stats.r*1000)
+        rerr = np.abs(tr.stats.distance - tr.stats.r*1000)
+        if rerr > rerror:
+            rerror = rerr
         # create a shapely polygon from the circle coordinates
         circ_polygon = sgeom.Polygon(circ)
         # extract the exterior coordinates of the polygon
         x, y = circ_polygon.exterior.xy
         # plot the exterior of the polygon
         ax2.plot(x, y, color=tr.stats.colour, linewidth=1, linestyle='--', alpha=1, transform=ccrs.Geodetic())
+if plotrs:
+    err_circle = gd.circle(lon=lonE, lat=latE, radius=rerror)
+    err_circle_polygon = sgeom.Polygon(err_circle)
+    x, y = err_circle_polygon.exterior.xy
+    ax2.plot(x, y, color='r', linewidth=1, transform=ccrs.Geodetic())
 ax2.legend()
 """
 #plot only the places inside the map boundary
@@ -451,7 +463,7 @@ if eq:
 else:
     fig.text(0.75, 0.96, 'Likely Mine Blast at '+locE, ha='center', size = 'large', color='r')     # use for unidentified events
 fig.text(0.75, 0.95, 'Latitude: '+str(abs(latE))+'°S, Longitude: '+str(abs(lonE))+'°E, Time: '+eventTime.strftime('%d/%m/%y %H:%M:%S UTC'), ha='center', color = 'b')
-fig.text(0.75, 0.94, 'Depth = '+str(depth)+' km. ID = '+eventID, ha='center', color = 'b')
+fig.text(0.75, 0.94, 'Depth = '+str(depth)+' km. ID = '+eventID+'. Error Radius = '+str(round(rerror/1000,1))+' kms.', ha='center', color = 'b')
 fig.text(0.75, 0.93, 'Filter = '+str(ft[1])+' to '+str(ft[2])+' Hz. Output = '+output, ha='center', color = 'b')
 fig.text(0.75, 0.92, 'Estimated '+mlabel+' = '+str(np.round(mLav,1))+' +/- '+str(mLerr)+'. Energy = '+f"{qenergy:0.1E}"+'J or '+f"{qenergy/4.18e6:0.1E}"+' kg TNT.', ha='center', color = 'b')
 
@@ -475,6 +487,9 @@ else:
 #print filename on bottom left corner of diagram
 filename = "D:/Pictures/Raspberry Shake and Boom/2025/M"+str(mag)+'Quake '+locE+eventID+eventTime.strftime('%Y%m%d %H%M%S UTCSection '+output+'.png')
 fig.text(0.05, 0.01,filename, size='x-small')
+
+# Promote Oberon Citizen Science Network bottom right
+fig.text(0.95, 0.01,"Oberon Citizen Science Network: https://oberon-citizen.science/", ha='right')
 
 # save the final figure if the plot is ready
 if save_plot:
